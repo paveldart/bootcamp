@@ -7,7 +7,9 @@
 	</head>
 	<body>
 		<div id="bootcamp-app">
-			<div id="header"></div>
+			<div id="header">
+                <h1>results</h1>
+			</div>
             <div id="main-header">
                 <div class="match-item match-id">ID / Time</div>
                 <div class="match-item match-team">Our team</div>
@@ -30,7 +32,24 @@
             </div>
 		</script>
 		<script type="text/template" id="stats-template">
-            <span id="count">Wins: <strong><%= wins %></strong>, Loses: <strong><%= loses %></strong></span>
+            <div id="stats">
+                <h1>stats</h1>
+                <div class="count">
+                    <span>Wins: <strong><%= wins %></strong>, Loses: <strong><%= loses %></strong></span>
+                    <div class="meter">
+                        <span class="box" style="width: <%- Math.round((100 * wins)/(wins + loses)) %>%"></span>
+                        <span class="box box-two" style="width: <%- Math.round((100 * loses)/(wins + loses)) %>%"></span>
+                    </div>
+                </div>
+
+                <div class="count">
+                    <span>Radiant team: <strong><%= radiant %></strong>, Dire team: <strong><%= dire %></strong></span>
+                    <div class="meter">
+                        <span class="box" style="width: <%- Math.round((100 * radiant)/(radiant + dire)) %>%"></span>
+                        <span class="box box-two" style="width: <%- Math.round((100 * dire)/(radiant + dire)) %>%"></span>
+                    </div>
+                </div>
+            </div>
 		</script>
 
 		<script src="js/libs/jquery/jquery.js"></script>

@@ -16,8 +16,18 @@
 			});
 		},
 
-		loses: function () {
+		lose: function () {
 			return this.without.apply(this, this.win());
+		},
+
+        radiant: function () {
+			return this.filter(function (match) {
+				return match.get('result').radiant_team;
+			});
+		},
+
+		dire: function () {
+			return this.without.apply(this, this.radiant());
 		},
 
 		comparator: function (match) {

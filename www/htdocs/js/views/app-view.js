@@ -46,8 +46,10 @@
 		// of the app doesn't change.
 		render: function () {
 			var that = this,
-                win = app.matches.win().length,
-                loses = app.matches.loses().length;
+                wins = app.matches.win().length,
+                loses = app.matches.lose().length,
+                radiant = app.matches.radiant().length,
+                dire = app.matches.dire().length;
 
 			if (app.matches.length) {
                 that.$main.show();
@@ -55,7 +57,9 @@
 
                 that.$footer.html(that.statsTemplate({
                     loses: loses,
-                    wins: win
+                    wins: wins,
+                    radiant: radiant,
+                    dire: dire
 				}));
 
                 that.$('#filters li a')

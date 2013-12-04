@@ -23,7 +23,7 @@
             var that = this;
 
             that.allCheckbox = that.$('#toggle-all')[0];
-            that.$footer = that.$('#footer');
+            that.$stats = that.$('#stats-container');
             that.matchList = that.$('#matches-list');
             that.$main = that.$('#main');
 
@@ -49,17 +49,25 @@
                 wins = app.matches.win().length,
                 loses = app.matches.lose().length,
                 radiant = app.matches.radiant().length,
-                dire = app.matches.dire().length;
+                dire = app.matches.dire().length,
+                radiantWins = app.matches.radiantWins().length,
+                radiantLoses = radiant - radiantWins,
+                direWins = app.matches.direWins().length,
+                direLoses = dire - direWins;
 
 			if (app.matches.length) {
                 that.$main.show();
-                that.$footer.show();
+                that.$stats.show();
 
-                that.$footer.html(that.statsTemplate({
+                that.$stats.html(that.statsTemplate({
                     loses: loses,
                     wins: wins,
                     radiant: radiant,
-                    dire: dire
+                    dire: dire,
+                    radiantWins: radiantWins,
+                    radiantLoses: radiantLoses,
+                    direWins: direWins,
+                    direLoses: direLoses
 				}));
 
                 that.$('#filters li a')
@@ -68,7 +76,7 @@
 					.addClass('selected');
 			} else {
                 that.$main.hide();
-                that.$footer.hide();
+                that.$stats.hide();
 			}
 
 //            that.allCheckbox.checked = !remaining;

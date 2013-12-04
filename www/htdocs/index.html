@@ -7,6 +7,7 @@
 	</head>
 	<body>
 		<div id="bootcamp-app">
+            <div id="stats-container"></div>
 			<div id="header">
                 <h1>results</h1>
 			</div>
@@ -20,7 +21,6 @@
 			<div id="main">
 				<div id="matches-list"></div>
 			</div>
-            <div id="footer"></div>
 		</div>
 		<script type="text/template" id="item-template">
             <% if (result.won_match === true) { %><div class="won"><% } else { %><div class="lost"><% } %>
@@ -34,8 +34,8 @@
 		<script type="text/template" id="stats-template">
             <div id="stats">
                 <h1>stats</h1>
-                <div class="count">
-                    <span>Wins: <strong><%= wins %></strong>, Loses: <strong><%= loses %></strong></span>
+                <div class="count count-first">
+                    <span>Wins — <strong><%= wins %></strong>, Loses — <strong><%= loses %></strong></span>
                     <div class="meter">
                         <span class="box" style="width: <%- Math.round((100 * wins)/(wins + loses)) %>%"></span>
                         <span class="box box-two" style="width: <%- Math.round((100 * loses)/(wins + loses)) %>%"></span>
@@ -43,10 +43,26 @@
                 </div>
 
                 <div class="count">
-                    <span>Radiant team: <strong><%= radiant %></strong>, Dire team: <strong><%= dire %></strong></span>
+                    <span>Radiant team games — <strong><%= radiant %></strong>, Dire team games — <strong><%= dire %></strong></span>
                     <div class="meter">
                         <span class="box" style="width: <%- Math.round((100 * radiant)/(radiant + dire)) %>%"></span>
                         <span class="box box-two" style="width: <%- Math.round((100 * dire)/(radiant + dire)) %>%"></span>
+                    </div>
+                </div>
+
+                <div class="count">
+                    <span>Radiant team: Wins — <strong><%= radiantWins %></strong>, Loses — <strong><%= radiantLoses %></strong></span>
+                    <div class="meter">
+                        <span class="box" style="width: <%- Math.round((100 * radiantWins)/radiant) %>%"></span>
+                        <span class="box box-two" style="width: <%- Math.round((100 * radiantLoses)/radiant) %>%"></span>
+                    </div>
+                </div>
+
+                <div class="count count-last">
+                    <span>Dire team: Wins — <strong><%= direWins %></strong>, Loses — <strong><%= direLoses %></strong></span>
+                    <div class="meter">
+                        <span class="box" style="width: <%- Math.round((100 * direWins)/dire) %>%"></span>
+                        <span class="box box-two" style="width: <%- Math.round((100 * direLoses)/dire) %>%"></span>
                     </div>
                 </div>
             </div>

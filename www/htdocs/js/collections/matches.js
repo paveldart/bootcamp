@@ -30,6 +30,18 @@
 			return this.without.apply(this, this.radiant());
 		},
 
+        radiantWins: function () {
+            return this.filter(function (match) {
+                return match.get('result').radiant_team && match.get('win');
+            });
+		},
+
+        direWins: function () {
+            return this.filter(function (match) {
+                return (match.get('result').radiant_team === false) && match.get('win');
+            });
+		},
+
 		comparator: function (match) {
 			return match.get('order');
 		}

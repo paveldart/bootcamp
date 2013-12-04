@@ -24,7 +24,7 @@ body {
 	line-height: 1.4em;
 	background: #fffbee;
 	color: #4d4d4d;
-	width: 1002px;
+	width: 1000px;
 	margin: 0 auto;
 	-webkit-font-smoothing: antialiased;
 	-moz-font-smoothing: antialiased;
@@ -46,29 +46,11 @@ a:hover {
 }
 
 #bootcamp-app {
-	background: #fff;
-	background: rgba(255, 255, 255, 0.5);
-	margin: 100px 0 40px 0;
-	border: 1px solid #ccc;
+	margin: 0 0 40px 0;
 	position: relative;
-	border-top-left-radius: 2px;
-	border-top-right-radius: 2px;
-	box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2),
-				0 25px 50px 0 rgba(0, 0, 0, 0.15);
-}
-
-#bootcamp-app input::-webkit-input-placeholder {
-	font-style: italic;
-}
-
-#bootcamp-app input::-moz-placeholder {
-	font-style: italic;
-	color: #a9a9a9;
 }
 
 #stats {
-    clear: both;
-    float: left;
     width: 100%;
     margin-top: 15px;
 }
@@ -79,31 +61,19 @@ h1 {
     font-weight: normal;
     line-height: 1.4;
     margin: 0;
-    position: absolute;
     text-align: center;
     text-shadow: -1px -1px rgba(0, 0, 0, 0.2);
-    top: -100px;
     width: 100%;
 }
 
-#stats h1 {
-    position: static;
-    top: 0;
-}
-
 #header {
-	padding-top: 30px;
+	padding: 15px 0 30px;
 	border-radius: inherit;
+    border-bottom: 1px dotted #adadad;
 }
 
 #main-header {
-	content: '';
-	position: absolute;
-	top: 0;
-	right: 0;
-	left: 0;
 	height: 30px;
-	z-index: 2;
 	background: #555;
 }
 
@@ -116,9 +86,14 @@ h1 {
     }
 
 #main {
-	position: relative;
+    border: 1px solid #ccc;
+    position: relative;
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+    box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2),
+    0 25px 50px 0 rgba(0, 0, 0, 0.15);
+    background: rgba(255, 255, 255, 0.5);
 	z-index: 2;
-	border-top: 1px dotted #adadad;
 }
 
 .radiant {
@@ -308,7 +283,7 @@ label[for='toggle-all'] {
 	margin-bottom: -1px;
 }
 
-#footer {
+#stats-container {
 	color: #777;
 }
 
@@ -317,8 +292,11 @@ label[for='toggle-all'] {
     width: 100%;
 }
 
-.count:last-child {
+.count.count-last {
     margin: 15px 0;
+}
+.count.count-first {
+    margin: 0;
 }
 
 .meter {
@@ -326,10 +304,14 @@ label[for='toggle-all'] {
     height: 20px;
     margin: 5px 0 0;
     position: relative;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    border-radius: 20px;
+    overflow: hidden;
 }
 
 .meter .box {
-    opacity: 0.7;
+    opacity: 0.6;
     display: block;
     top: 0;
     height: 100%;

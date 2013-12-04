@@ -48,7 +48,7 @@ a:hover {
 #bootcamp-app {
 	background: #fff;
 	background: rgba(255, 255, 255, 0.9);
-	margin: 130px 0 40px 0;
+	margin: 20px 0 40px 0;
 	border: 1px solid #ccc;
 	position: relative;
 	border-top-left-radius: 2px;
@@ -222,29 +222,31 @@ label[for='toggle-all'] {
     display: inline-block;
     line-height: 1.2;
     vertical-align: middle;
+    text-align: center;
+    padding: 15px 10px 15px;
     }
 
 .match-id {
-    width: 90px;
-	padding: 15px 0 15px 15px;
+    width: 85px;
 }
 
 .match-team {
-    padding: 15px 0 15px 15px;
-    white-space: pre;
     width: 70px;
     }
 
 .match-result {
-    padding: 15px 0 15px 15px;
-    white-space: pre;
     width: 60px;
 }
 
 .match-heroes,
 .match-opponents-heroes {
-    padding: 15px 0 15px 15px;
-    width: 300px;
+    padding: 15px 0;
+    width: 335px;
+}
+
+.hero-image {
+    width: 64px;
+    height: 36px;
 }
 
 .match-info {

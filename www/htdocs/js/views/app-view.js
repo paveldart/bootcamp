@@ -1,6 +1,7 @@
 /*global Backbone, jQuery, _ */
 (function ($) {
-    var app = window.app || {};
+    var app = window.app || {},
+        u;
 
 	// The Application
 	// ---------------
@@ -26,8 +27,11 @@
             that.matchList = that.$('#mathes-list');
             that.$main = that.$('#main');
 
+            that.isFetched = false;
+
             that.listenTo(app.matches, 'add', that.addOne);
             that.listenTo(app.matches, 'reset', that.addAll);
+            that.listenTo(app.heroes, 'reset', that.addAll);
             that.listenTo(app.matches, 'filter', that.filterAll);
             that.listenTo(app.matches, 'all', that.render);
 
@@ -77,7 +81,11 @@
             var that = this;
 
             that.matchList.html('');
-			app.matches.each(that.addOne, that);
+
+            if ((that.isFetched === false) && (app.heroes.toJSON()[0] !== u) && (app.matches.toJSON()[0] !== u)) {
+                that.isFetched = true;
+                app.matches.each(that.addOne, that);
+            }
 		},
 
 		filterOne: function (match) {

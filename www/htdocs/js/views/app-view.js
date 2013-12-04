@@ -24,7 +24,7 @@
 
             that.allCheckbox = that.$('#toggle-all')[0];
             that.$footer = that.$('#footer');
-            that.matchList = that.$('#mathes-list');
+            that.matchList = that.$('#matches-list');
             that.$main = that.$('#main');
 
             that.isFetched = false;

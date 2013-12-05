@@ -45,14 +45,9 @@ a:hover {
     text-decoration: none;
 }
 
-#bootcamp-app {
+#bootcamp {
 	margin: 0 0 40px 0;
 	position: relative;
-}
-
-#stats {
-    width: 100%;
-    margin-top: 15px;
 }
 
 h1 {
@@ -284,7 +279,33 @@ label[for='toggle-all'] {
 }
 
 #stats-container {
-	color: #777;
+    margin-left: -50px;
+    color: #777;
+    position: absolute;
+    top: -365px;
+    width: 1100px;
+    z-index: 200;
+    -webkit-transition: top 0.3s;
+            transition: top 0.3s;
+}
+
+#stats-container:hover {
+    top: -350px;
+}
+
+#stats-container.isVisible {
+    top: 0;
+}
+
+#stats {
+    background: #FFFBEE;
+    padding: 15px 50px 30px;
+    width: 1000px;
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+    box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2),
+                0 25px 50px 0 rgba(0, 0, 0, 0.15);
+    border: 1px solid #ccc;
 }
 
 .count {
@@ -449,63 +470,6 @@ label[for='toggle-all'] {
 	display: none;
 }
 
-hr {
-	margin: 20px 0;
-	border: 0;
-	border-top: 1px dashed #C5C5C5;
-	border-bottom: 1px dashed #F7F7F7;
-}
-
-.learn a {
-	font-weight: normal;
-	text-decoration: none;
-	color: #b83f45;
-}
-
-.learn a:hover {
-	text-decoration: underline;
-	color: #787e7e;
-}
-
-.learn h3,
-.learn h4,
-.learn h5 {
-	margin: 10px 0;
-	font-weight: 500;
-	line-height: 1.2;
-	color: #000;
-}
-
-.learn h3 {
-	font-size: 24px;
-}
-
-.learn h4 {
-	font-size: 18px;
-}
-
-.learn h5 {
-	margin-bottom: 0;
-	font-size: 14px;
-}
-
-.learn ul {
-	padding: 0;
-	margin: 0 0 30px 25px;
-}
-
-.learn li {
-	line-height: 20px;
-}
-
-.learn p {
-	font-size: 15px;
-	font-weight: 300;
-	line-height: 1.3;
-	margin-top: 0;
-	margin-bottom: 0;
-}
-
 .quote {
 	border: none;
 	margin: 20px 0 60px 0;
@@ -562,34 +526,4 @@ hr {
 	right: 30px;
 	border: 13px solid transparent;
 	border-top-color: rgba(0, 0, 0, .04);
-}
-
-.learn-bar > .learn {
-	position: absolute;
-	width: 272px;
-	top: 8px;
-	left: -300px;
-	padding: 10px;
-	border-radius: 5px;
-	background-color: rgba(255, 255, 255, .6);
-	-webkit-transition-property: left;
-	transition-property: left;
-	-webkit-transition-duration: 500ms;
-	transition-duration: 500ms;
-}
-
-@media (min-width: 899px) {
-	.learn-bar {
-		width: auto;
-		margin: 0 0 0 300px;
-	}
-
-	.learn-bar > .learn {
-		left: 8px;
-	}
-
-	.learn-bar #bootcamp-app {
-		width: 550px;
-		margin: 130px auto 40px auto;
-	}
 }

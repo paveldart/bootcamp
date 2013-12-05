@@ -11,22 +11,26 @@
 
 		// Instead of generating a new element, bind to the existing skeleton of
 		// the App already present in the HTML.
-		el: '#bootcamp-app',
+		el: '#bootcamp',
 
 		// Our template for the line of statistics at the bottom of the app.
 		statsTemplate: _.template($('#stats-template').html()),
 
 		events: {
+            'click #stats-container': 'visibleStats',
+            'click body': 'visibleStatsBody'
 		},
 
 		initialize: function () {
-            var that = this;
+            var that = this,
+                $el = that.$el;
 
-            that.allCheckbox = that.$('#toggle-all')[0];
-            that.$stats = that.$('#stats-container');
-            that.matchList = that.$('#matches-list');
-            that.$main = that.$('#main');
+            that.allCheckbox = $el.find('#toggle-all')[0];
+            that.$stats = $el.find('#stats-container');
+            that.matchList = $el.find('#matches-list');
+            that.$main = $el.find('#main');
 
+            that.$statsVisible = false;
             that.isFetched = false;
 
             that.listenTo(app.matches, 'add', that.addOne);
@@ -70,10 +74,10 @@
                     direLoses: direLoses
 				}));
 
-                that.$('#filters li a')
-					.removeClass('selected')
-					.filter('[href="#/' + (app.MatchFilter || '') + '"]')
-					.addClass('selected');
+//                that.$('#filters li a')
+//					.removeClass('selected')
+//					.filter('[href="#/' + (app.MatchFilter || '') + '"]')
+//					.addClass('selected');
 			} else {
                 that.$main.hide();
                 that.$stats.hide();
@@ -108,6 +112,31 @@
             var that = this;
 
 			app.matches.each(that.filterOne, that);
+		},
+
+        visibleStats: function (e) {
+            var that = this;
+
+            e.preventDefault();
+
+            if (that.$statsVisible === true) {
+                that.$stats.removeClass('isVisible');
+                that.$statsVisible = false;
+            } else {
+                that.$stats.addClass('isVisible');
+                that.$statsVisible = true;
+            }
+		},
+
+        visibleStatsBody: function (e) {
+            var that = this;
+
+            e.preventDefault();
+
+            if (that.$statsVisible === true) {
+                that.$stats.removeClass('isVisible');
+                that.$statsVisible = false;
+            }
 		}
 	});
 })(jQuery);

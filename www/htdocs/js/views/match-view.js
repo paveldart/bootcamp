@@ -45,8 +45,8 @@
                 model.set('win', false);
             }
 
+            result.duration_text = that.parsePeriod(currentTime - (result.start_time + result.duration));
             result.duration = that.parseDuration(result.duration);
-            result.duration_text = that.parsePeriod(currentTime - result.start_time);
 
             model.set('result', result);
             model.set('heroes', heroes);

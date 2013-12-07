@@ -33,7 +33,7 @@
             for ( i = players.length ; i-- ; ) {
                 playerID = players[i].account_id;
                 if ((playerID === 83684200) || (playerID === 83161861)) {
-                    result.radiant_team = i <= 5;
+                    result.radiant_team = i <= 4;
                 }
             }
 
@@ -45,6 +45,7 @@
                 model.set('win', false);
             }
 
+            result.duration = that.parseDuration(result.duration);
             result.duration_text = that.parsePeriod(currentTime - result.start_time);
 
             model.set('result', result);
@@ -167,6 +168,20 @@
             }
 
             return time + ' ago';
+        },
+
+        parseDuration: function(duration){
+            var minutes,
+                seconds;
+
+            minutes = (duration / 60) | 0;
+            seconds = duration % 60;
+
+            if (seconds < 10) {
+                seconds = '0' + seconds;
+            }
+
+            return minutes + ':' + seconds;
         }
 	});
 })(jQuery);

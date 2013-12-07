@@ -1,10 +1,11 @@
 (function () {
-    var app = window.app || {};
+    var app = window.app || {},
+        Heroes;
 
-	// Mathes Collection
+	// Heroes Collection
 	// ---------------
 
-	var Heroes = Backbone.Collection.extend({
+	Heroes = Backbone.Collection.extend({
         url: '/data/heroes.json'
 	});
 

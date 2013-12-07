@@ -47,6 +47,7 @@
 
             result.duration_text = that.parsePeriod(currentTime - (result.start_time + result.duration));
             result.duration = that.parseDuration(result.duration);
+            result.mode_text = app.mods.toJSON()[0].mods[result.game_mode].name;
 
             model.set('result', result);
             model.set('heroes', heroes);

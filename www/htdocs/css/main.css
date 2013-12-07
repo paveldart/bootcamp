@@ -214,13 +214,13 @@ label[for='toggle-all'] {
     }
 
 .match-result {
-    width: 60px;
+    width: 50px;
 }
 
 .match-heroes,
 .match-opponents-heroes {
     padding: 15px 0;
-    width: 335px;
+    width: 330px;
 }
 
 .hero-image {
@@ -228,9 +228,9 @@ label[for='toggle-all'] {
     height: 36px;
 }
 
-.match-info {
-    width: 100px;
-    text-align: center;
+.match-mode {
+    width: 30px;
+    font-size: 10px;
     }
 
 .match-time,

@@ -36,12 +36,14 @@
             that.listenTo(app.matches, 'add', that.addOne);
             that.listenTo(app.matches, 'reset', that.addAll);
             that.listenTo(app.heroes, 'reset', that.addAll);
+            that.listenTo(app.mods, 'reset', that.addAll);
             that.listenTo(app.matches, 'filter', that.filterAll);
             that.listenTo(app.matches, 'all', that.render);
 
 			// Suppresses 'add' events with {reset: true} and prevents the app view 
 			// from being re-rendered for every model. Only renders when the 'reset'
 			// event is triggered at the end of the fetch.
+			app.mods.fetch({reset: true});
 			app.heroes.fetch({reset: true});
 			app.matches.fetch({reset: true});
 		},
@@ -98,7 +100,7 @@
 
             that.matchList.html('');
 
-            if ((that.isFetched === false) && (app.heroes.toJSON()[0] !== u) && (app.matches.toJSON()[0] !== u)) {
+            if ((that.isFetched === false) && (app.heroes.toJSON()[0] !== u) && (app.matches.toJSON()[0] !== u) && (app.mods.toJSON()[0] !== u)) {
                 that.isFetched = true;
                 app.matches.each(that.addOne, that);
             }

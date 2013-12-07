@@ -1,9 +1,10 @@
 (function () {
-    var app = window.app || {};
+    var app = window.app || {},
+        MatchRouter;
 
 	// Match Router
 	// ----------
-	var MatchRouter = Backbone.Router.extend({
+    MatchRouter = Backbone.Router.extend({
 		routes: {
 			'*filter': 'setFilter'
 		},

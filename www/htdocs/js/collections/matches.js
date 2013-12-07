@@ -1,10 +1,11 @@
 (function () {
-    var app = window.app || {};
+    var app = window.app || {},
+        Matches;
 
 	// Mathes Collection
 	// ---------------
 
-	var Matches = Backbone.Collection.extend({
+	Matches = Backbone.Collection.extend({
 		// Reference to this collection's model.
 		model: app.Match,
 

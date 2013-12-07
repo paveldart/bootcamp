@@ -25,7 +25,17 @@
                 model = that.model,
                 result = model.get('result'),
                 currentTime = new Date().getTime() / 1000,
-                heroes = app.heroes.toJSON()[0];
+                heroes = app.heroes.toJSON()[0],
+                players = result.players,
+                playerID,
+                i;
+
+            for ( i = players.length ; i-- ; ) {
+                playerID = players[i].account_id;
+                if ((playerID === 83684200) || (playerID === 83161861)) {
+                    result.radiant_team = i <= 5;
+                }
+            }
 
             if ((result.radiant_win === true && result.radiant_team === true) || (result.radiant_win === false && result.radiant_team === false)) {
                 result.won_match = true;

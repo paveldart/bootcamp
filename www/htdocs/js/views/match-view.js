@@ -13,6 +13,10 @@
 
 		// The DOM events specific to an item.
 		events: {
+			'click .match-item': 'toggleMatch',
+			'click .match-view': 'toggleMatch',
+			'click .match-info': 'toggleMatch',
+			'click .match-hero-stats': 'toggleMatch'
 //			'click .toggle': 'toggleCompleted',
 //			'dblclick label': 'edit',
 //			'click .destroy': 'clear',
@@ -28,7 +32,11 @@
                 heroes = app.heroes.toJSON()[0],
                 players = result.players,
                 playerID,
-                i;
+                player,
+                i,
+                u;
+
+            that.$el.addClass('match-view');
 
             for ( i = players.length ; i-- ; ) {
                 playerID = players[i].account_id;
@@ -39,10 +47,32 @@
 
             if ((result.radiant_win === true && result.radiant_team === true) || (result.radiant_win === false && result.radiant_team === false)) {
                 result.won_match = true;
+                that.$el.addClass('won');
                 model.set('win', true);
             } else {
                 result.won_match = false;
+                that.$el.addClass('lost');
                 model.set('win', false);
+            }
+
+            for ( i = players.length ; i-- ; ) {
+                player = players[i];
+                if (((result.radiant_win === true) && (result.radiant_team === true) && (i <= 4)) || ((result.radiant_win === false) && (result.radiant_team === false) && (i > 4))) {
+                    if (app.cache.ourWinHeroes['' + player.hero_id] === u) {
+                        app.cache.ourWinHeroes['' + player.hero_id] = 1;
+                        app.cache.ourWinHeroes.count += 1;
+                    } else {
+                        app.cache.ourWinHeroes['' + player.hero_id] += 1;
+                    }
+                }
+                if (((result.radiant_win === false) && (result.radiant_team === false) && (i <= 4)) || ((result.radiant_win === true) && (result.radiant_team === true) && (i > 4))) {
+                    if (app.cache.opponentsWinHeroes['' + player.hero_id] === u) {
+                        app.cache.opponentsWinHeroes['' + player.hero_id] = 1;
+                        app.cache.opponentsWinHeroes.count += 1;
+                    } else {
+                        app.cache.opponentsWinHeroes['' + player.hero_id] += 1;
+                    }
+                }
             }
 
             result.duration_text = that.parsePeriod(currentTime - (result.start_time + result.duration));
@@ -54,7 +84,7 @@
 
             that.listenTo(model, 'change', that.render);
             that.listenTo(model, 'destroy', that.remove);
-            that.listenTo(model, 'visible', that.toggleVisible);
+//            that.listenTo(model, 'visible', that.toggleVisible);
 
 		},
 
@@ -62,15 +92,26 @@
             var that = this;
 
             that.$el.html(that.template(that.model.toJSON()));
-//            that.$el.toggleClass('completed', that.model.get('completed'));
-//            that.toggleVisible();
-            that.$input = that.$('.edit');
+
+//            that.$input = that.$('.edit');
+
 			return that;
 		},
 
-		toggleVisible: function () {
-			this.$el.toggleClass('hidden', this.isHidden());
+		toggleMatch: function () {
+            var that = this,
+                $el = that.$el;
+
+            if ($el.hasClass('isToggled')) {
+                $el.removeClass('isToggled');
+            } else {
+                $el.addClass('isToggled');
+            }
 		},
+
+//        toggleVisible: function () {
+//			this.$el.toggleClass('hidden', this.isHidden());
+//		},
 
 		isHidden: function () {
 			var isCompleted = this.model.get('completed');
@@ -88,11 +129,11 @@
 		// Switch this view into `"editing"` mode, displaying the input field.
 		edit: function () {
 			this.$el.addClass('editing');
-			this.$input.focus();
+//			this.$input.focus();
 		},
 
 		close: function () {
-			var value = this.$input.val();
+//			var value = this.$input.val();
 			var trimmedValue = value.trim();
 
 			if (trimmedValue) {
@@ -109,13 +150,6 @@
 			}
 
 			this.$el.removeClass('editing');
-		},
-
-		// If you hit `enter`, we're through editing the item.
-		updateOnEnter: function (e) {
-			if (e.which === 13) {
-				this.close();
-			}
 		},
 
 		clear: function () {

@@ -30,6 +30,7 @@
             that.matchList = $el.find('#matches-list');
             that.$main = $el.find('#main');
 
+            that.renderCount = 0;
             that.$statsVisible = false;
             that.isFetched = false;
 
@@ -59,32 +60,53 @@
                 radiantWins = app.matches.radiantWins().length,
                 radiantLoses = radiant - radiantWins,
                 direWins = app.matches.direWins().length,
-                direLoses = dire - direWins;
+                direLoses = dire - direWins,
+                ourHeroes,
+                ourWinHeroes,
+                opponentsHeroes,
+                opponentsWinHeroes,
+                cache = app.cache,
+                u;
 
-			if (app.matches.length) {
-                that.$main.show();
-                that.$stats.show();
+            if (app.cache !== u) {
+                if ((app.matches.length) && (that.renderCount === app.matches.length)) {
+                    ourHeroes = that.sortHeroes(cache.ourHeroes);
+                    ourWinHeroes = that.sortHeroes(cache.ourWinHeroes);
+                    opponentsHeroes = that.sortHeroes(cache.opponentsHeroes);
+                    opponentsWinHeroes = that.sortHeroes(cache.opponentsWinHeroes);
+//                    ourHeroes = that.deleteUnnecessaryHeroes(ourHeroes);
+//                    ourWinHeroes = that.deleteUnnecessaryHeroes(ourWinHeroes);
+//                    opponentsHeroes = that.deleteUnnecessaryHeroes(opponentsHeroes);
+//                    opponentsWinHeroes = that.deleteUnnecessaryHeroes(opponentsWinHeroes);
 
-                that.$stats.html(that.statsTemplate({
-                    loses: loses,
-                    wins: wins,
-                    radiant: radiant,
-                    dire: dire,
-                    radiantWins: radiantWins,
-                    radiantLoses: radiantLoses,
-                    direWins: direWins,
-                    direLoses: direLoses
-				}));
+
+                    that.$main.show();
+                    that.$stats.show();
+
+                    that.$stats.html(that.statsTemplate({
+                        loses: loses,
+                        wins: wins,
+                        radiant: radiant,
+                        dire: dire,
+                        radiantWins: radiantWins,
+                        radiantLoses: radiantLoses,
+                        direWins: direWins,
+                        direLoses: direLoses
+//                        heroes: app.heroes.toJSON()[0]
+//                        ourHeroes: ourHeroes,
+//                        opponentsHeroes: opponentsHeroes
+                    }));
 
 //                that.$('#filters li a')
 //					.removeClass('selected')
 //					.filter('[href="#/' + (app.MatchFilter || '') + '"]')
 //					.addClass('selected');
-			} else {
-                that.$main.hide();
-                that.$stats.hide();
-			}
-
+                } else {
+                    that.$main.hide();
+                    that.$stats.hide();
+                    that.renderCount += 1;
+                }
+            }
 //            that.allCheckbox.checked = !remaining;
 		},
 
@@ -103,6 +125,10 @@
             if ((that.isFetched === false) && (app.heroes.toJSON()[0] !== u) && (app.matches.toJSON()[0] !== u) && (app.mods.toJSON()[0] !== u)) {
                 that.isFetched = true;
                 app.matches.each(that.addOne, that);
+                if (app.cache.isLoading === false) {
+                    that.$el.addClass('isLoading');
+                    app.cache.isLoading = true;
+                }
             }
 		},
 
@@ -139,6 +165,50 @@
                 that.$stats.removeClass('isVisible');
                 that.$statsVisible = false;
             }
-		}
-	});
+		},
+
+        sortHeroes: function(heroes) {
+            var sortHeroes = {},
+                heroID,
+                currentHero;
+
+            for (heroID in heroes) {
+                if ((heroes.hasOwnProperty(heroID)) && (heroID !== 'count')) {
+                    currentHero = '' + heroes[heroID];
+                    if (sortHeroes[currentHero] === u) {
+                        sortHeroes[currentHero] = [];
+                        sortHeroes[currentHero].push(heroID);
+                    } else {
+                        sortHeroes[currentHero].push(heroID)
+                    }
+                }
+            }
+            sortHeroes.count = heroes.count;
+            return sortHeroes;
+        },
+
+        deleteUnnecessaryHeroes: function(heroes) {
+            var cacheHeroes = {},
+                heroesCount = heroes.count - 0,
+                countID;
+
+            for (countID in heroes) {
+                if ((heroes.hasOwnProperty(countID)) && (countID !== 'count')) {
+                    if (heroesCount - heroes[countID].length > 2) {
+                        heroesCount = (heroesCount - 0) - heroes[countID].length;
+                        heroes[countID] = null;
+                    } else {
+                        break;
+                    }
+                }
+            }
+
+            for (countID in heroes) {
+                if ((heroes.hasOwnProperty(countID)) && (countID !== 'count') && (heroes[countID] !== null)) {
+                    cacheHeroes['' + countID] = heroes[countID];
+                }
+            }
+            return cacheHeroes;
+        }
+    });
 })(jQuery);

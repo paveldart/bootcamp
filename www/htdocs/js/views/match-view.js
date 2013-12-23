@@ -65,7 +65,7 @@
                         app.cache.ourWinHeroes['' + player.hero_id] += 1;
                     }
                 }
-                if (((result.radiant_win === false) && (result.radiant_team === false) && (i <= 4)) || ((result.radiant_win === true) && (result.radiant_team === true) && (i > 4))) {
+                if (((result.radiant_win === true) && (result.radiant_team === false) && (i <= 4)) || ((result.radiant_win === false) && (result.radiant_team === true) && (i > 4))) {
                     if (app.cache.opponentsWinHeroes['' + player.hero_id] === u) {
                         app.cache.opponentsWinHeroes['' + player.hero_id] = 1;
                         app.cache.opponentsWinHeroes.count += 1;

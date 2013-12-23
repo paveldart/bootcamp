@@ -66,35 +66,53 @@
             <div id="stats">
                 <h1>stats</h1>
                 <div class="count count-first">
-                    <span>Wins — <strong><%= wins %></strong>, Loses — <strong><%= loses %></strong></span>
+                    <span class="count-label count-label-right">Loses</span>
+                    <span class="count-label">Wins</span>
                     <div class="meter">
-                        <span class="box" style="width: <%- Math.round((100 * wins)/(wins + loses)) %>%"></span>
-                        <span class="box box-two" style="width: <%- Math.round((100 * loses)/(wins + loses)) %>%"></span>
+                        <div class="box" style="width: <%- Math.round((100 * wins)/(wins + loses)) %>%"><span class="box-value"><%= wins %> (<%- Math.round((100 * wins)/(wins + loses)) %>%)</span></div>
+                        <div class="box box-two" style="width: <%- Math.round((100 * loses)/(wins + loses)) %>%"><span class="box-value"><%= loses %>  (<%- Math.round((100 * loses)/(wins + loses)) %>%)</span></div>
                     </div>
                 </div>
 
                 <div class="count">
-                    <span>Radiant team games — <strong><%= radiant %></strong>, Dire team games — <strong><%= dire %></strong></span>
+                    <span class="count-label count-label-right">Radiant team: Loses</span>
+                    <span class="count-label">Radiant team: Wins</span>
                     <div class="meter">
-                        <span class="box" style="width: <%- Math.round((100 * radiant)/(radiant + dire)) %>%"></span>
-                        <span class="box box-two" style="width: <%- Math.round((100 * dire)/(radiant + dire)) %>%"></span>
-                    </div>
-                </div>
-
-                <div class="count">
-                    <span>Radiant team: Wins — <strong><%= radiantWins %></strong>, Loses — <strong><%= radiantLoses %></strong></span>
-                    <div class="meter">
-                        <span class="box" style="width: <%- Math.round((100 * radiantWins)/radiant) %>%"></span>
-                        <span class="box box-two" style="width: <%- Math.round((100 * radiantLoses)/radiant) %>%"></span>
+                        <div class="box" style="width: <%- Math.round((100 * radiantWins)/radiant) %>%"><span class="box-value"><%= radiantWins %> (<%- Math.round((100 * radiantWins)/radiant) %>%)</span></div>
+                        <div class="box box-two" style="width: <%- Math.round((100 * radiantLoses)/radiant) %>%"><span class="box-value"><%= radiantLoses %> (<%- Math.round((100 * radiantLoses)/radiant) %>%)</span></div>
                     </div>
                 </div>
 
                 <div class="count count-last">
-                    <span>Dire team: Wins — <strong><%= direWins %></strong>, Loses — <strong><%= direLoses %></strong></span>
+                    <span class="count-label count-label-right">Dire team: Loses</span>
+                    <span class="count-label">Dire team: Wins</span>
                     <div class="meter">
-                        <span class="box" style="width: <%- Math.round((100 * direWins)/dire) %>%"></span>
-                        <span class="box box-two" style="width: <%- Math.round((100 * direLoses)/dire) %>%"></span>
+                        <div class="box" style="width: <%- Math.round((100 * direWins)/dire) %>%"><span class="box-value"><%= direWins %> (<%- Math.round((100 * direWins)/dire) %>%)</span></div>
+                        <div class="box box-two" style="width: <%- Math.round((100 * direLoses)/dire) %>%"><span class="box-value"><%= direLoses %> (<%- Math.round((100 * direLoses)/dire) %>%)</span></div>
                     </div>
+                </div>
+
+                <div class="count">
+                    <span class="count-label count-label-right">Dire team games</span>
+                    <span class="count-label">Radiant team games</span>
+                    <div class="meter">
+                        <div class="box" style="width: <%- Math.round((100 * radiant)/(radiant + dire)) %>%"><span class="box-value"><%= radiant %> (<%- Math.round((100 * radiant)/(radiant + dire)) %>%)</span></div>
+                        <div class="box box-two" style="width: <%- Math.round((100 * dire)/(radiant + dire)) %>%"><span class="box-value"><%= dire %> (<%- Math.round((100 * dire)/(radiant + dire)) %>%)</span></div>
+                    </div>
+                </div>
+
+                <div class="hero-stats hero-opponents-stats">
+                    <div class="hero-stats-label">Best opponents heroes</div>
+                    <% if ((typeof opponentsWinHeroes !== 'undefined') && (typeof heroes !== 'undefined')) { %>
+                        <img class="hero-image" src="images/heroes/<%- opponentsWinHeroes[0] %>.png" title="<%- heroes[opponentsWinHeroes[0]].localized_name  %>"> <img class="hero-image" src="images/heroes/<%- opponentsWinHeroes[1] %>.png" title="<%- heroes[opponentsWinHeroes[1]].localized_name  %>"> <img class="hero-image" src="images/heroes/<%- opponentsWinHeroes[2] %>.png" title="<%- heroes[opponentsWinHeroes[2]].localized_name  %>"> <img class="hero-image" src="images/heroes/<%- opponentsWinHeroes[3] %>.png" title="<%- heroes[opponentsWinHeroes[3]].localized_name  %>"> <img class="hero-image" src="images/heroes/<%- opponentsWinHeroes[4] %>.png" title="<%- heroes[opponentsWinHeroes[4]].localized_name  %>">
+                    <% } %>
+                </div>
+
+                <div class="hero-stats">
+                    <div class="hero-stats-label">Best our heroes</div>
+                    <% if ((typeof ourWinHeroes !== 'undefined') && (typeof heroes !== 'undefined')) { %>
+                        <img class="hero-image" src="images/heroes/<%- ourWinHeroes[0] %>.png" title="<%- heroes[ourWinHeroes[0]].localized_name  %>"> <img class="hero-image" src="images/heroes/<%- ourWinHeroes[1] %>.png" title="<%- heroes[ourWinHeroes[1]].localized_name  %>"> <img class="hero-image" src="images/heroes/<%- ourWinHeroes[2] %>.png" title="<%- heroes[ourWinHeroes[2]].localized_name  %>"> <img class="hero-image" src="images/heroes/<%- ourWinHeroes[3] %>.png" title="<%- heroes[ourWinHeroes[3]].localized_name  %>"> <img class="hero-image" src="images/heroes/<%- ourWinHeroes[4] %>.png" title="<%- heroes[ourWinHeroes[4]].localized_name  %>">
+                    <% } %>
                 </div>
             </div>
 		</script>

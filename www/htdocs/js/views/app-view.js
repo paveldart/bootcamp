@@ -75,10 +75,9 @@
                     opponentsHeroes = that.sortHeroes(cache.opponentsHeroes);
                     opponentsWinHeroes = that.sortHeroes(cache.opponentsWinHeroes);
 //                    ourHeroes = that.deleteUnnecessaryHeroes(ourHeroes);
-//                    ourWinHeroes = that.deleteUnnecessaryHeroes(ourWinHeroes);
+                    ourWinHeroes = that.deleteUnnecessaryWinHeroes(ourWinHeroes);
 //                    opponentsHeroes = that.deleteUnnecessaryHeroes(opponentsHeroes);
-//                    opponentsWinHeroes = that.deleteUnnecessaryHeroes(opponentsWinHeroes);
-
+                    opponentsWinHeroes = that.deleteUnnecessaryWinHeroes(opponentsWinHeroes);
 
                     that.$main.show();
                     that.$stats.show();
@@ -91,10 +90,10 @@
                         radiantWins: radiantWins,
                         radiantLoses: radiantLoses,
                         direWins: direWins,
-                        direLoses: direLoses
-//                        heroes: app.heroes.toJSON()[0]
-//                        ourHeroes: ourHeroes,
-//                        opponentsHeroes: opponentsHeroes
+                        direLoses: direLoses,
+                        heroes: app.heroes.toJSON()[0],
+                        ourWinHeroes: ourWinHeroes,
+                        opponentsWinHeroes: opponentsWinHeroes
                     }));
 
 //                that.$('#filters li a')
@@ -209,6 +208,32 @@
                 }
             }
             return cacheHeroes;
+        },
+
+        deleteUnnecessaryWinHeroes: function(heroes) {
+            var countID,
+                winHeroes = [],
+                currentHeroesCount,
+                i;
+
+            for (countID in heroes) {
+                if ((heroes.hasOwnProperty(countID)) && (countID !== 'count')) {
+                    currentHeroesCount = heroes[countID];
+                    for (i = currentHeroesCount.length; i--;) {
+                        winHeroes.push(currentHeroesCount[i]);
+                    }
+                }
+            }
+
+            winHeroes[0] = winHeroes[winHeroes.length - 1];
+            winHeroes[1] = winHeroes[winHeroes.length - 2];
+            winHeroes[2] = winHeroes[winHeroes.length - 3];
+            winHeroes[3] = winHeroes[winHeroes.length - 4];
+            winHeroes[4] = winHeroes[winHeroes.length - 5];
+
+            winHeroes.length = 5;
+
+            return winHeroes;
         }
     });
 })(jQuery);

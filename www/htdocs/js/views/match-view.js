@@ -17,11 +17,6 @@
 			'click .match-view': 'toggleMatch',
 			'click .match-info': 'toggleMatch',
 			'click .match-hero-stats': 'toggleMatch'
-//			'click .toggle': 'toggleCompleted',
-//			'dblclick label': 'edit',
-//			'click .destroy': 'clear',
-//			'keypress .edit': 'updateOnEnter',
-//			'blur .edit': 'close'
 		},
 
 		initialize: function () {
@@ -33,6 +28,7 @@
                 players = result.players,
                 playerID,
                 player,
+                cache,
                 i,
                 u;
 
@@ -55,22 +51,68 @@
                 model.set('win', false);
             }
 
+            cache = app.cache;
+
             for ( i = players.length ; i-- ; ) {
                 player = players[i];
                 if (((result.radiant_win === true) && (result.radiant_team === true) && (i <= 4)) || ((result.radiant_win === false) && (result.radiant_team === false) && (i > 4))) {
-                    if (app.cache.ourWinHeroes['' + player.hero_id] === u) {
-                        app.cache.ourWinHeroes['' + player.hero_id] = 1;
-                        app.cache.ourWinHeroes.count += 1;
+                    if (cache.ourWinHeroes['' + player.hero_id] === u) {
+                        cache.ourWinHeroes['' + player.hero_id] = 1;
+                        cache.ourWinHeroes.count += 1;
                     } else {
-                        app.cache.ourWinHeroes['' + player.hero_id] += 1;
+                        cache.ourWinHeroes['' + player.hero_id] += 1;
+                    }
+
+                    if (cache.ourHeroes['' + player.hero_id] === u) {
+                        cache.ourHeroes['' + player.hero_id] = { win: 1, lose: 0 };
+                        cache.ourHeroes.count += 1;
+                    } else {
+                        cache.ourHeroes['' + player.hero_id].win += 1;
+                    }
+                } else if (((result.radiant_win === false) && (result.radiant_team === true) && (i <= 4)) || ((result.radiant_win === true) && (result.radiant_team === true) && (i > 4))) {
+                    if (cache.ourLoseHeroes['' + player.hero_id] === u) {
+                        cache.ourLoseHeroes['' + player.hero_id] = 1;
+                        cache.ourLoseHeroes.count += 1;
+                    } else {
+                        cache.ourLoseHeroes['' + player.hero_id] += 1;
+                    }
+
+                    if (cache.ourHeroes['' + player.hero_id] === u) {
+                        cache.ourHeroes['' + player.hero_id] = { win: 0, lose: 1 };
+                        cache.ourHeroes.count += 1;
+                    } else {
+                        cache.ourHeroes['' + player.hero_id].lose += 1;
                     }
                 }
+
+
                 if (((result.radiant_win === true) && (result.radiant_team === false) && (i <= 4)) || ((result.radiant_win === false) && (result.radiant_team === true) && (i > 4))) {
-                    if (app.cache.opponentsWinHeroes['' + player.hero_id] === u) {
-                        app.cache.opponentsWinHeroes['' + player.hero_id] = 1;
-                        app.cache.opponentsWinHeroes.count += 1;
+                    if (cache.opponentsWinHeroes['' + player.hero_id] === u) {
+                        cache.opponentsWinHeroes['' + player.hero_id] = 1;
+                        cache.opponentsWinHeroes.count += 1;
                     } else {
-                        app.cache.opponentsWinHeroes['' + player.hero_id] += 1;
+                        cache.opponentsWinHeroes['' + player.hero_id] += 1;
+                    }
+
+                    if (cache.opponentsHeroes['' + player.hero_id] === u) {
+                        cache.opponentsHeroes['' + player.hero_id] = { win: 1, lose: 0 };
+                        cache.opponentsHeroes.count += 1;
+                    } else {
+                        cache.opponentsHeroes['' + player.hero_id].win += 1;
+                    }
+                } else if (((result.radiant_win === false) && (result.radiant_team === false) && (i <= 4)) || ((result.radiant_win === true) && (result.radiant_team === true) && (i > 4))) {
+                    if (cache.opponentsLoseHeroes['' + player.hero_id] === u) {
+                        cache.opponentsLoseHeroes['' + player.hero_id] = 1;
+                        cache.opponentsLoseHeroes.count += 1;
+                    } else {
+                        cache.opponentsLoseHeroes['' + player.hero_id] += 1;
+                    }
+
+                    if (cache.opponentsHeroes['' + player.hero_id] === u) {
+                        cache.opponentsHeroes['' + player.hero_id] = { win: 0, lose: 1 };
+                        cache.opponentsHeroes.count += 1;
+                    } else {
+                        cache.opponentsHeroes['' + player.hero_id].lose += 1;
                     }
                 }
             }

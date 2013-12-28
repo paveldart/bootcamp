@@ -216,6 +216,23 @@ h1 {
     width: 195px;
     }
 
+.wrapper-hero-image {
+    display: inline-block;
+    position: relative;
+    }
+
+.win-rate-hero {
+    background: none repeat scroll 0 0 rgba(255, 255, 255, 0.3);
+    color: #FFFFFF;
+    font-size: 20px;
+    height: 100%;
+    line-height: 1.4;
+    padding: 10px 0 0;
+    position: absolute;
+    text-align: center;
+    width: 100%;
+    }
+
 .hero-image {
     width: 64px;
     height: 36px;
@@ -264,11 +281,12 @@ h1 {
     top: -465px;
     width: 100%;
     z-index: 200;
+    min-width: 1000px;
     background: #FFFBEE;
     border-top-left-radius: 2px;
     border-top-right-radius: 2px;
     box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2);
-    border: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
     -webkit-transition: top 0.3s;
        -moz-transition: top 0.3s;
             transition: top 0.3s;
@@ -287,6 +305,7 @@ h1 {
     padding: 15px 0 20px;
     width: 1000px;
     margin: 0 auto;
+    height: 440px;
     }
 
 .count {
@@ -352,7 +371,7 @@ h1 {
     background-image: -ms-linear-gradient(top, #FF5454, #86223E);
     background-image: -o-linear-gradient(top, #FF5454, #86223E);
     -webkit-border-top-right-radius: 15px;
-    -webkit-border-bottom-right-radius: 15px;
+    -webkit-border-bottom-right-radius: 15;
     -moz-border-radius-topright: 15px;
     -moz-border-radius-bottomright: 15px;
     border-top-right-radius: 15px;

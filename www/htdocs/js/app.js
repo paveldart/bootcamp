@@ -7,13 +7,23 @@ $(function () {
         ourHeroes: {
             count: 0
         },
+        ourWinRateHeroes: {
+        },
         ourWinHeroes: {
+            count: 0
+        },
+        ourLoseHeroes: {
             count: 0
         },
         opponentsHeroes: {
             count: 0
         },
+        opponentsWinRateHeroes: {
+        },
         opponentsWinHeroes: {
+            count: 0
+        },
+        opponentsLoseHeroes: {
             count: 0
         },
         isLoading: false

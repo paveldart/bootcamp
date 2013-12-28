@@ -53,31 +53,38 @@
 		// of the app doesn't change.
 		render: function () {
 			var that = this,
-                wins = app.matches.win().length,
-                loses = app.matches.lose().length,
-                radiant = app.matches.radiant().length,
-                dire = app.matches.dire().length,
-                radiantWins = app.matches.radiantWins().length,
-                radiantLoses = radiant - radiantWins,
-                direWins = app.matches.direWins().length,
-                direLoses = dire - direWins,
-                ourHeroes,
+                wins,
+                loses,
+                radiant,
+                dire,
+                radiantWins,
+                radiantLoses,
+                direWins,
+                direLoses,
                 ourWinHeroes,
-                opponentsHeroes,
                 opponentsWinHeroes,
                 cache = app.cache,
                 u;
 
-            if (app.cache !== u) {
-                if ((app.matches.length) && (that.renderCount === app.matches.length)) {
-                    ourHeroes = that.sortHeroes(cache.ourHeroes);
+
+            if ((cache !== u) && (cache.isLoading === true)) {
+                wins = app.matches.win().length;
+                loses = app.matches.lose().length;
+                radiant = app.matches.radiant().length;
+                dire = app.matches.dire().length;
+                radiantWins = app.matches.radiantWins().length;
+                radiantLoses = radiant - radiantWins;
+                direWins = app.matches.direWins().length;
+                direLoses = dire - direWins;
+
+                if (app.matches.length) {
+//                    cache.ourWinRateHeroes = that.winRateSortHeroes(cache.ourHeroes);
+//                    cache.opponentsWinRateHeroes = that.winRateSortHeroes(cache.opponentsHeroes);
+
                     ourWinHeroes = that.sortHeroes(cache.ourWinHeroes);
-                    opponentsHeroes = that.sortHeroes(cache.opponentsHeroes);
                     opponentsWinHeroes = that.sortHeroes(cache.opponentsWinHeroes);
-//                    ourHeroes = that.deleteUnnecessaryHeroes(ourHeroes);
-                    ourWinHeroes = that.deleteUnnecessaryWinHeroes(ourWinHeroes);
-//                    opponentsHeroes = that.deleteUnnecessaryHeroes(opponentsHeroes);
-                    opponentsWinHeroes = that.deleteUnnecessaryWinHeroes(opponentsWinHeroes);
+                    ourWinHeroes = that.deleteUnnecessaryHeroes(ourWinHeroes, 'our');
+                    opponentsWinHeroes = that.deleteUnnecessaryHeroes(opponentsWinHeroes, 'opponents');
 
                     that.$main.show();
                     that.$stats.show();
@@ -95,18 +102,11 @@
                         ourWinHeroes: ourWinHeroes,
                         opponentsWinHeroes: opponentsWinHeroes
                     }));
-
-//                that.$('#filters li a')
-//					.removeClass('selected')
-//					.filter('[href="#/' + (app.MatchFilter || '') + '"]')
-//					.addClass('selected');
                 } else {
                     that.$main.hide();
                     that.$stats.hide();
-                    that.renderCount += 1;
                 }
             }
-//            that.allCheckbox.checked = !remaining;
 		},
 
 		addOne: function (match) {
@@ -186,42 +186,66 @@
             return sortHeroes;
         },
 
-        deleteUnnecessaryHeroes: function(heroes) {
-            var cacheHeroes = {},
-                heroesCount = heroes.count - 0,
-                countID;
+        winRateSortHeroes: function(heroes) {
+            var sortHeroes = {},
+                heroID,
+                currentHero,
+                currentLoseValue,
+                currentWinValue,
+                currentValue;
 
-            for (countID in heroes) {
-                if ((heroes.hasOwnProperty(countID)) && (countID !== 'count')) {
-                    if (heroesCount - heroes[countID].length > 2) {
-                        heroesCount = (heroesCount - 0) - heroes[countID].length;
-                        heroes[countID] = null;
+            for (heroID in heroes) {
+                if ((heroes.hasOwnProperty(heroID)) && (heroID !== 'count')) {
+                    currentHero = heroes[heroID];
+                    currentWinValue = currentHero.win;
+                    currentLoseValue = currentHero.lose;
+
+                    if (currentLoseValue === 0) {
+                        currentValue = '100';
                     } else {
-                        break;
+                        currentValue = Math.round(100 * currentWinValue / (currentWinValue + currentLoseValue)) + '';
+                    }
+
+                    if (sortHeroes[currentValue] === u) {
+                        sortHeroes[currentValue] = [];
+                        sortHeroes[currentValue].push(heroID);
+                    } else {
+                        sortHeroes[currentValue].push(heroID)
                     }
                 }
             }
-
-            for (countID in heroes) {
-                if ((heroes.hasOwnProperty(countID)) && (countID !== 'count') && (heroes[countID] !== null)) {
-                    cacheHeroes['' + countID] = heroes[countID];
-                }
-            }
-            return cacheHeroes;
+            return this.deleteUnnecessaryHeroes(sortHeroes, null);
         },
 
-        deleteUnnecessaryWinHeroes: function(heroes) {
+        deleteUnnecessaryHeroes: function(heroes, type) {
             var countID,
                 winHeroes = [],
+                currentHeroes,
                 currentHeroesCount,
+                cache = app.cache.ourLoseHeroes,
                 i;
+
+            if (type === 'opponents') {
+                cache = app.cache.opponentsLoseHeroes;
+            }
 
             for (countID in heroes) {
                 if ((heroes.hasOwnProperty(countID)) && (countID !== 'count')) {
                     currentHeroesCount = heroes[countID];
                     for (i = currentHeroesCount.length; i--;) {
-                        winHeroes.push(currentHeroesCount[i]);
+                        currentHeroes = [];
+                        currentHeroes.push(currentHeroesCount[i]);
+                        currentHeroes.push(countID);
+                        winHeroes.push(currentHeroes);
                     }
+                }
+            }
+
+            function pushLose(array) {
+                if (cache[array[0]] === u) {
+                    array.push('0');
+                } else {
+                    array.push(cache[array[0]] + '');
                 }
             }
 
@@ -232,6 +256,12 @@
             winHeroes[4] = winHeroes[winHeroes.length - 5];
 
             winHeroes.length = 5;
+
+            if (type !== null) {
+                for (i = winHeroes.length; i-- ;) {
+                    pushLose(winHeroes[i]);
+                }
+            }
 
             return winHeroes;
         }

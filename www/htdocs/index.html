@@ -127,11 +127,11 @@
                 <div class="popup-heroes-content">
                     <div class="popup-opponents-heroes">
                         <div class="popup-hero-title">Opponents stats</div>
-                        <% if (typeof opponentsHeroes[heroID + ''] !== 'undefined') { %><%- opponentsHeroes[heroID + ''].win %> / <%- opponentsHeroes[heroID + ''].lose %><% } else { %>0 / 0<% } %>
+                        <% if (typeof opponentsHeroes[heroID + ''] !== 'undefined') { %><%- opponentsHeroes[heroID + ''].win %> / <%- opponentsHeroes[heroID + ''].lose %> (<%- Math.round((100 * opponentsHeroes[heroID + ''].win) / (opponentsHeroes[heroID + ''].lose + opponentsHeroes[heroID + ''].win)) %>%)<% } else { %>0 / 0<% } %>
                     </div>
                     <div class="popup-our-heroes">
                         <div class="popup-hero-title">Our stats</div>
-                        <% if (typeof ourHeroes[heroID + ''] !== 'undefined') { %><%- ourHeroes[heroID + ''].win %> / <%- ourHeroes[heroID + ''].lose %><% } else { %>0 / 0<% } %>
+                        <% if (typeof ourHeroes[heroID + ''] !== 'undefined') { %><%- ourHeroes[heroID + ''].win %> / <%- ourHeroes[heroID + ''].lose %> (<%- Math.round((100 * ourHeroes[heroID + ''].win) / (ourHeroes[heroID + ''].lose + ourHeroes[heroID + ''].win)) %>%)<% } else { %>0 / 0<% } %>
                     </div>
                 </div>
             </div>

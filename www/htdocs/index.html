@@ -7,6 +7,7 @@
         <link rel="shortcut icon" href="images/favicon.ico">
 	</head>
 	<body>
+        <div id="popup-wrapper"></div>
 		<div id="bootcamp">
             <div id="stats-container"></div>
 			<div id="header">
@@ -30,9 +31,9 @@
                 <div class="match-item match-id"><span class="match-duration"><%- result.duration %></span><a target="_blank" href="//dotabuff.com/matches/<%- result.match_id %>"><%- result.match_id %></a><span class="match-time"><%- result.duration_text %></span></div>
                 <div class="match-item match-mode"><%- result.mode_text %></div>
                 <div class="match-item match-team"><% if (result.radiant_team === true) { %><span class="radiant">Radiant<% } else { %><span class="dire">Dire<% } %></span></div>
-                <div class="match-item match-heroes"><% if (result.radiant_team === true) { %><img class="hero-image" src="images/heroes/<%- result.players[0].hero_id + '' %>.png" title="<%- heroes[result.players[0].hero_id + ''].localized_name  %>"><img class="hero-image" src="images/heroes/<%- result.players[1].hero_id + '' %>.png" title="<%- heroes[result.players[1].hero_id + ''].localized_name  %>"><img class="hero-image" src="images/heroes/<%- result.players[2].hero_id + '' %>.png" title="<%- heroes[result.players[2].hero_id + ''].localized_name  %>"><img class="hero-image" src="images/heroes/<%- result.players[3].hero_id + '' %>.png" title="<%- heroes[result.players[3].hero_id + ''].localized_name  %>"><img class="hero-image" src="images/heroes/<%- result.players[4].hero_id + '' %>.png" title="<%- heroes[result.players[4].hero_id + ''].localized_name  %>"><% } else { %><img class="hero-image" src="images/heroes/<%- result.players[5].hero_id + '' %>.png" title="<%- heroes[result.players[5].hero_id + ''].localized_name  %>"><img class="hero-image" src="images/heroes/<%- result.players[6].hero_id + '' %>.png" title="<%- heroes[result.players[6].hero_id + ''].localized_name  %>"><img class="hero-image" src="images/heroes/<%- result.players[7].hero_id + '' %>.png" title="<%- heroes[result.players[7].hero_id + ''].localized_name  %>"><img class="hero-image" src="images/heroes/<%- result.players[8].hero_id + '' %>.png" title="<%- heroes[result.players[8].hero_id + ''].localized_name  %>"><img class="hero-image" src="images/heroes/<%- result.players[9].hero_id + '' %>.png" title="<%- heroes[result.players[9].hero_id + ''].localized_name  %>"><% } %></div>
+                <div class="match-item match-heroes"><% if (result.radiant_team === true) { %><img class="hero-image" data-id="<%- result.players[0].hero_id + '' %>" src="images/heroes/<%- result.players[0].hero_id + '' %>.png" title="<%- heroes[result.players[0].hero_id + ''].localized_name  %>"><img class="hero-image" data-id="<%- result.players[1].hero_id + '' %>" src="images/heroes/<%- result.players[1].hero_id + '' %>.png" title="<%- heroes[result.players[1].hero_id + ''].localized_name  %>"><img class="hero-image" data-id="<%- result.players[2].hero_id + '' %>" src="images/heroes/<%- result.players[2].hero_id + '' %>.png" title="<%- heroes[result.players[2].hero_id + ''].localized_name  %>"><img class="hero-image" data-id="<%- result.players[3].hero_id + '' %>" src="images/heroes/<%- result.players[3].hero_id + '' %>.png" title="<%- heroes[result.players[3].hero_id + ''].localized_name  %>"><img class="hero-image" data-id="<%- result.players[4].hero_id + '' %>" src="images/heroes/<%- result.players[4].hero_id + '' %>.png" title="<%- heroes[result.players[4].hero_id + ''].localized_name  %>"><% } else { %><img class="hero-image" data-id="<%- result.players[5].hero_id + '' %>" src="images/heroes/<%- result.players[5].hero_id + '' %>.png" title="<%- heroes[result.players[5].hero_id + ''].localized_name  %>"><img class="hero-image" data-id="<%- result.players[6].hero_id + '' %>" src="images/heroes/<%- result.players[6].hero_id + '' %>.png" title="<%- heroes[result.players[6].hero_id + ''].localized_name  %>"><img class="hero-image" data-id="<%- result.players[7].hero_id + '' %>" src="images/heroes/<%- result.players[7].hero_id + '' %>.png" title="<%- heroes[result.players[7].hero_id + ''].localized_name  %>"><img class="hero-image" data-id="<%- result.players[8].hero_id + '' %>" src="images/heroes/<%- result.players[8].hero_id + '' %>.png" title="<%- heroes[result.players[8].hero_id + ''].localized_name  %>"><img class="hero-image" data-id="<%- result.players[9].hero_id + '' %>" src="images/heroes/<%- result.players[9].hero_id + '' %>.png" title="<%- heroes[result.players[9].hero_id + ''].localized_name  %>"><% } %></div>
                 <div class="match-item match-result"><% if (result.won_match === true) { %>1 : 0<% } else { %>0 : 1<% } %></div>
-                <div class="match-item match-opponents-heroes"><% if (result.radiant_team === false) { %><img class="hero-image" src="images/heroes/<%- result.players[0].hero_id + '' %>.png" title="<%- heroes[result.players[0].hero_id + ''].localized_name  %>"><img class="hero-image" src="images/heroes/<%- result.players[1].hero_id + '' %>.png" title="<%- heroes[result.players[1].hero_id + ''].localized_name  %>"><img class="hero-image" src="images/heroes/<%- result.players[2].hero_id + '' %>.png" title="<%- heroes[result.players[2].hero_id + ''].localized_name  %>"><img class="hero-image" src="images/heroes/<%- result.players[3].hero_id + '' %>.png" title="<%- heroes[result.players[3].hero_id + ''].localized_name  %>"><img class="hero-image" src="images/heroes/<%- result.players[4].hero_id + '' %>.png" title="<%- heroes[result.players[4].hero_id + ''].localized_name  %>"><% } else { %><img class="hero-image" src="images/heroes/<%- result.players[5].hero_id + '' %>.png" title="<%- heroes[result.players[5].hero_id + ''].localized_name  %>"><img class="hero-image" src="images/heroes/<%- result.players[6].hero_id + '' %>.png" title="<%- heroes[result.players[6].hero_id + ''].localized_name  %>"><img class="hero-image" src="images/heroes/<%- result.players[7].hero_id + '' %>.png" title="<%- heroes[result.players[7].hero_id + ''].localized_name  %>"><img class="hero-image" src="images/heroes/<%- result.players[8].hero_id + '' %>.png" title="<%- heroes[result.players[8].hero_id + ''].localized_name  %>"><img class="hero-image" src="images/heroes/<%- result.players[9].hero_id + '' %>.png" title="<%- heroes[result.players[9].hero_id + ''].localized_name  %>"><% } %></div>
+                <div class="match-item match-opponents-heroes"><% if (result.radiant_team === false) { %><img class="hero-image" data-id="<%- result.players[0].hero_id + '' %>" src="images/heroes/<%- result.players[0].hero_id + '' %>.png" title="<%- heroes[result.players[0].hero_id + ''].localized_name  %>"><img class="hero-image" data-id="<%- result.players[1].hero_id + '' %>" src="images/heroes/<%- result.players[1].hero_id + '' %>.png" title="<%- heroes[result.players[1].hero_id + ''].localized_name  %>"><img class="hero-image" data-id="<%- result.players[2].hero_id + '' %>" src="images/heroes/<%- result.players[2].hero_id + '' %>.png" title="<%- heroes[result.players[2].hero_id + ''].localized_name  %>"><img class="hero-image" data-id="<%- result.players[3].hero_id + '' %>" src="images/heroes/<%- result.players[3].hero_id + '' %>.png" title="<%- heroes[result.players[3].hero_id + ''].localized_name  %>"><img class="hero-image" data-id="<%- result.players[4].hero_id + '' %>" src="images/heroes/<%- result.players[4].hero_id + '' %>.png" title="<%- heroes[result.players[4].hero_id + ''].localized_name  %>"><% } else { %><img class="hero-image" data-id="<%- result.players[5].hero_id + '' %>" src="images/heroes/<%- result.players[5].hero_id + '' %>.png" title="<%- heroes[result.players[5].hero_id + ''].localized_name  %>"><img class="hero-image" data-id="<%- result.players[6].hero_id + '' %>" src="images/heroes/<%- result.players[6].hero_id + '' %>.png" title="<%- heroes[result.players[6].hero_id + ''].localized_name  %>"><img class="hero-image" data-id="<%- result.players[7].hero_id + '' %>" src="images/heroes/<%- result.players[7].hero_id + '' %>.png" title="<%- heroes[result.players[7].hero_id + ''].localized_name  %>"><img class="hero-image" data-id="<%- result.players[8].hero_id + '' %>" src="images/heroes/<%- result.players[8].hero_id + '' %>.png" title="<%- heroes[result.players[8].hero_id + ''].localized_name  %>"><img class="hero-image" data-id="<%- result.players[9].hero_id + '' %>" src="images/heroes/<%- result.players[9].hero_id + '' %>.png" title="<%- heroes[result.players[9].hero_id + ''].localized_name  %>"><% } %></div>
             </div>
             <div class="match-info">
                 <div class="match-info-line">
@@ -110,13 +111,31 @@
 
                 <div class="hero-stats">
                     <div class="hero-stats-label">Best our heroes</div>
-                    <% console.log (ourWinHeroes); %>
                     <% if ((typeof ourWinHeroes !== 'undefined') && (typeof heroes !== 'undefined')) { %>
                         <div class="wrapper-hero-image"><div class="win-rate-hero"><%- ourWinHeroes[0][1] %> / <%- ourWinHeroes[0][2] %></div><img class="hero-image" src="images/heroes/<%- ourWinHeroes[0][0] %>.png" title="<%- heroes[ourWinHeroes[0][0]].localized_name  %>"></div> <div class="wrapper-hero-image"><div class="win-rate-hero"><%- ourWinHeroes[1][1] %> / <%- ourWinHeroes[1][2] %></div><img class="hero-image" src="images/heroes/<%- ourWinHeroes[1][0] %>.png" title="<%- heroes[ourWinHeroes[1][0]].localized_name  %>"></div> <div class="wrapper-hero-image"><div class="win-rate-hero"><%- ourWinHeroes[2][1] %> / <%- ourWinHeroes[2][2] %></div><img class="hero-image" src="images/heroes/<%- ourWinHeroes[2][0] %>.png" title="<%- heroes[ourWinHeroes[2][0]].localized_name  %>"></div> <div class="wrapper-hero-image"><div class="win-rate-hero"><%- ourWinHeroes[3][1] %> / <%- ourWinHeroes[3][2] %></div><img class="hero-image" src="images/heroes/<%- ourWinHeroes[3][0] %>.png" title="<%- heroes[ourWinHeroes[3][0]].localized_name  %>"></div> <div class="wrapper-hero-image"><div class="win-rate-hero"><%- ourWinHeroes[4][1] %> / <%- ourWinHeroes[4][2] %></div><img class="hero-image" src="images/heroes/<%- ourWinHeroes[4][0] %>.png" title="<%- heroes[ourWinHeroes[4][0]].localized_name  %>"></div>
                     <% } %>
                 </div>
             </div>
 		</script>
+
+        <script type="text/template" id="popup-template">
+            <div id="popup">
+                <i class="icon icon-close"></i>
+                <div class="popup-hero-title"><%- heroes[heroID + ''].localized_name  %></div>
+                <img class="popup-hero-image" src="images/heroes/<%- heroID + '' %>.png" title="<%- heroes[heroID + ''].localized_name  %>">
+
+                <div class="popup-heroes-content">
+                    <div class="popup-opponents-heroes">
+                        <div class="popup-hero-title">Opponents stats</div>
+                        <% if (typeof opponentsHeroes[heroID + ''] !== 'undefined') { %><%- opponentsHeroes[heroID + ''].win %> / <%- opponentsHeroes[heroID + ''].lose %><% } else { %>0 / 0<% } %>
+                    </div>
+                    <div class="popup-our-heroes">
+                        <div class="popup-hero-title">Our stats</div>
+                        <% if (typeof ourHeroes[heroID + ''] !== 'undefined') { %><%- ourHeroes[heroID + ''].win %> / <%- ourHeroes[heroID + ''].lose %><% } else { %>0 / 0<% } %>
+                    </div>
+                </div>
+            </div>
+        </script>
 
 		<script src="js/libs/jquery/jquery.js"></script>
 		<script src="js/libs/underscore/underscore.js"></script>
@@ -125,6 +144,7 @@
 		<script src="js/collections/mods.js"></script>
 		<script src="js/collections/matches.js"></script>
 		<script src="js/collections/heroes.js"></script>
+		<script src="js/views/popup-view.js"></script>
 		<script src="js/views/match-view.js"></script>
 		<script src="js/views/app-view.js"></script>
 		<script src="js/routers/router.js"></script>

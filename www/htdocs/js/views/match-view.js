@@ -16,10 +16,11 @@
 			'click .match-item': 'toggleMatch',
 			'click .match-view': 'toggleMatch',
 			'click .match-info': 'toggleMatch',
-			'click .match-hero-stats': 'toggleMatch'
+			'click .match-hero-stats': 'toggleMatch',
+			'click .hero-image': 'showPopup'
 		},
 
-		initialize: function () {
+		initialize: function (options) {
             var that = this,
                 model = that.model,
                 result = model.get('result'),
@@ -51,10 +52,17 @@
                 model.set('win', false);
             }
 
+            if ((app.cache.currentTimestamp !== u) && (app.cache.currentTimestamp - result.start_time > 86400)) {
+                that.$el.addClass('new-day');
+            }
+
+            app.cache.currentTimestamp = result.start_time - 0;
+
             cache = app.cache;
 
             for ( i = players.length ; i-- ; ) {
                 player = players[i];
+
                 if (((result.radiant_win === true) && (result.radiant_team === true) && (i <= 4)) || ((result.radiant_win === false) && (result.radiant_team === false) && (i > 4))) {
                     if (cache.ourWinHeroes['' + player.hero_id] === u) {
                         cache.ourWinHeroes['' + player.hero_id] = 1;
@@ -69,14 +77,7 @@
                     } else {
                         cache.ourHeroes['' + player.hero_id].win += 1;
                     }
-                } else if (((result.radiant_win === false) && (result.radiant_team === true) && (i <= 4)) || ((result.radiant_win === true) && (result.radiant_team === true) && (i > 4))) {
-                    if (cache.ourLoseHeroes['' + player.hero_id] === u) {
-                        cache.ourLoseHeroes['' + player.hero_id] = 1;
-                        cache.ourLoseHeroes.count += 1;
-                    } else {
-                        cache.ourLoseHeroes['' + player.hero_id] += 1;
-                    }
-
+                } else if (((result.radiant_win === false) && (result.radiant_team === true) && (i <= 4)) || ((result.radiant_win === true) && (result.radiant_team === false) && (i > 4))) {
                     if (cache.ourHeroes['' + player.hero_id] === u) {
                         cache.ourHeroes['' + player.hero_id] = { win: 0, lose: 1 };
                         cache.ourHeroes.count += 1;
@@ -101,13 +102,6 @@
                         cache.opponentsHeroes['' + player.hero_id].win += 1;
                     }
                 } else if (((result.radiant_win === false) && (result.radiant_team === false) && (i <= 4)) || ((result.radiant_win === true) && (result.radiant_team === true) && (i > 4))) {
-                    if (cache.opponentsLoseHeroes['' + player.hero_id] === u) {
-                        cache.opponentsLoseHeroes['' + player.hero_id] = 1;
-                        cache.opponentsLoseHeroes.count += 1;
-                    } else {
-                        cache.opponentsLoseHeroes['' + player.hero_id] += 1;
-                    }
-
                     if (cache.opponentsHeroes['' + player.hero_id] === u) {
                         cache.opponentsHeroes['' + player.hero_id] = { win: 0, lose: 1 };
                         cache.opponentsHeroes.count += 1;
@@ -116,6 +110,8 @@
                     }
                 }
             }
+
+            that.wrapperPopup = options.wrapperPopup;
 
             result.duration_text = that.parsePeriod(currentTime - (result.start_time + result.duration));
             result.duration = that.parseDuration(result.duration);
@@ -140,14 +136,16 @@
 			return that;
 		},
 
-		toggleMatch: function () {
+		toggleMatch: function (e) {
             var that = this,
                 $el = that.$el;
 
-            if ($el.hasClass('isToggled')) {
-                $el.removeClass('isToggled');
-            } else {
-                $el.addClass('isToggled');
+            if ($(e.target).hasClass('hero-image') !== true) {
+                if ($el.hasClass('isToggled')) {
+                    $el.removeClass('isToggled');
+                } else {
+                    $el.addClass('isToggled');
+                }
             }
 		},
 
@@ -259,6 +257,16 @@
             }
 
             return minutes + ':' + seconds;
+        },
+
+        showPopup: function(e){
+            var that = this,
+                id = e.currentTarget.getAttribute('data-id');
+
+            e.preventDefault();
+            that.popup = new app.PopupView({ heroID: id, wrapperPopup: that.wrapperPopup });
+
+            that.wrapperPopup.addClass('isVisible');
         }
 	});
 })(jQuery);

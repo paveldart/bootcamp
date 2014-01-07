@@ -30,6 +30,8 @@
             that.matchList = $el.find('#matches-list');
             that.$main = $el.find('#main');
 
+            that.$popup = $('#popup-wrapper');
+
             that.renderCount = 0;
             that.$statsVisible = false;
             that.isFetched = false;
@@ -111,7 +113,7 @@
 
 		addOne: function (match) {
             var that = this,
-                view = new app.MatchView({ model: match });
+                view = new app.MatchView({ model: match, wrapperPopup: that.$popup });
 
             that.matchList.append(view.render().el);
 		},
@@ -222,11 +224,11 @@
                 winHeroes = [],
                 currentHeroes,
                 currentHeroesCount,
-                cache = app.cache.ourLoseHeroes,
+                cache = app.cache.ourHeroes,
                 i;
 
             if (type === 'opponents') {
-                cache = app.cache.opponentsLoseHeroes;
+                cache = app.cache.opponentsHeroes;
             }
 
             for (countID in heroes) {
@@ -245,7 +247,7 @@
                 if (cache[array[0]] === u) {
                     array.push('0');
                 } else {
-                    array.push(cache[array[0]] + '');
+                    array.push(cache[array[0]].lose + '');
                 }
             }
 

@@ -137,7 +137,7 @@ h1 {
 .match-view {
     position: relative;
     font-size: 0;
-    border-bottom: 1px dotted #ccc;
+    border-top: 1px dotted #ccc;
     height: 70px;
     overflow: hidden;
     -webkit-transition: height 0.3s;
@@ -145,8 +145,8 @@ h1 {
             transition: height 0.3s;
     }
 
-.match-view:last-child {
-    border-bottom: none;
+.match-view:first-child {
+    border-top: none;
     }
 
 .match-view.isToggled {
@@ -159,6 +159,10 @@ h1 {
 
 .lost {
     background: rgba(255, 0, 19, 0.05);
+    }
+
+.new-day {
+    border-top: 3px solid #ccc;
     }
 
 .match-info {
@@ -414,6 +418,74 @@ h1 {
 
 .hero-stats-label {
     padding-bottom: 5px;
+    }
+
+#popup-wrapper {
+    display: none;
+    }
+
+#popup-wrapper.isVisible {
+    display: block;
+    }
+
+#popup-wrapper.isVisible .popup-content {
+    background: none repeat scroll 0 0 rgba(255, 255, 255, 0.5);
+    bottom: 0;
+    height: 100%;
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 100%;
+    z-index: 2000;
+    }
+
+#popup-wrapper.isVisible #popup {
+    background: #FFFBEE;
+    height: 298px;
+    left: 50%;
+    margin-left: -275px;
+    margin-top: -175px;
+    padding: 25px;
+    position: absolute;
+    text-align: center;
+    top: 50%;
+    width: 498px;
+    border: 1px solid #CCC;
+    }
+
+.popup-hero-title {
+    font-size: 20px;
+    line-height: 40px;
+    }
+
+.popup-opponents-heroes,
+.popup-our-heroes {
+    padding-top: 20px;
+    width: 50%;
+    font-size: 20px;
+    }
+
+.popup-opponents-heroes {
+    float: right;
+    }
+
+.icon-close {
+    background: url('../images/icon-close.png') 0 0 no-repeat;
+    width: 32px;
+    height: 32px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    opacity: 0.5;
+    -webkit-transition: transform 0.3s;
+       -moz-transition: transform 0.3s;
+            transition: transform 0.3s;
+    }
+
+.icon-close:hover {
+    -webkit-transform: rotate(-90deg);
+       -moz-transform: rotate(-90deg);
+            transform: rotate(-90deg)
     }
 
 /*

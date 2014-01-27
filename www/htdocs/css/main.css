@@ -80,6 +80,7 @@ h1 {
     color: #FFFFFF;
     font-size: 14px;
     line-height: 1.4;
+    white-space: nowrap;
     }
 
 #main {
@@ -150,7 +151,7 @@ h1 {
     }
 
 .match-view.isToggled {
-    height: 220px;
+    height: 255px;
     }
 
 .won {
@@ -192,7 +193,7 @@ h1 {
     line-height: 1.2;
     vertical-align: middle;
     text-align: center;
-    padding: 15px 10px 15px;
+    padding: 15px 8px 15px;
     }
 
 .match-id {
@@ -200,11 +201,11 @@ h1 {
     }
 
 .match-team {
-    width: 60px;
+    width: 55px;
     }
 
 .match-result {
-    width: 55px;
+    width: 90px;
     }
 
 .match-heroes,
@@ -217,7 +218,7 @@ h1 {
     font-size: 12px;
     padding: 10px 25px;
     text-align: right;
-    width: 195px;
+    width: 178px;
     }
 
 .wrapper-hero-image {
@@ -462,7 +463,11 @@ h1 {
 .popup-our-heroes {
     padding-top: 20px;
     width: 50%;
-    font-size: 20px;
+    font-size: 16px;
+    }
+
+.popup-hero-stats {
+    margin-bottom: 10px;
     }
 
 .popup-opponents-heroes {

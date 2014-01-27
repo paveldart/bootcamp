@@ -72,17 +72,35 @@
                     }
 
                     if (cache.ourHeroes['' + player.hero_id] === u) {
-                        cache.ourHeroes['' + player.hero_id] = { win: 1, lose: 0 };
+                        cache.ourHeroes['' + player.hero_id] = {
+                            win: 1,
+                            lose: 0,
+                            kills: player.kills,
+                            deaths: player.deaths,
+                            assists: player.assists
+                        };
                         cache.ourHeroes.count += 1;
                     } else {
                         cache.ourHeroes['' + player.hero_id].win += 1;
+                        cache.ourHeroes['' + player.hero_id].kills += player.kills;
+                        cache.ourHeroes['' + player.hero_id].deaths += player.deaths;
+                        cache.ourHeroes['' + player.hero_id].assists += player.assists;
                     }
                 } else if (((result.radiant_win === false) && (result.radiant_team === true) && (i <= 4)) || ((result.radiant_win === true) && (result.radiant_team === false) && (i > 4))) {
                     if (cache.ourHeroes['' + player.hero_id] === u) {
-                        cache.ourHeroes['' + player.hero_id] = { win: 0, lose: 1 };
+                        cache.ourHeroes['' + player.hero_id] =  {
+                            win: 0,
+                            lose: 1,
+                            kills: player.kills,
+                            deaths: player.deaths,
+                            assists: player.assists
+                        };
                         cache.ourHeroes.count += 1;
                     } else {
                         cache.ourHeroes['' + player.hero_id].lose += 1;
+                        cache.ourHeroes['' + player.hero_id].kills += player.kills;
+                        cache.ourHeroes['' + player.hero_id].deaths += player.deaths;
+                        cache.ourHeroes['' + player.hero_id].assists += player.assists;
                     }
                 }
 
@@ -96,17 +114,35 @@
                     }
 
                     if (cache.opponentsHeroes['' + player.hero_id] === u) {
-                        cache.opponentsHeroes['' + player.hero_id] = { win: 1, lose: 0 };
+                        cache.opponentsHeroes['' + player.hero_id] = {
+                            win: 1,
+                            lose: 0,
+                            kills: player.kills,
+                            deaths: player.deaths,
+                            assists: player.assists
+                        };
                         cache.opponentsHeroes.count += 1;
                     } else {
                         cache.opponentsHeroes['' + player.hero_id].win += 1;
+                        cache.opponentsHeroes['' + player.hero_id].kills += player.kills;
+                        cache.opponentsHeroes['' + player.hero_id].deaths += player.deaths;
+                        cache.opponentsHeroes['' + player.hero_id].assists += player.assists;
                     }
                 } else if (((result.radiant_win === false) && (result.radiant_team === false) && (i <= 4)) || ((result.radiant_win === true) && (result.radiant_team === true) && (i > 4))) {
                     if (cache.opponentsHeroes['' + player.hero_id] === u) {
-                        cache.opponentsHeroes['' + player.hero_id] = { win: 0, lose: 1 };
+                        cache.opponentsHeroes['' + player.hero_id] = {
+                            win: 0,
+                            lose: 1,
+                            kills: player.kills,
+                            deaths: player.deaths,
+                            assists: player.assists
+                        };
                         cache.opponentsHeroes.count += 1;
                     } else {
                         cache.opponentsHeroes['' + player.hero_id].lose += 1;
+                        cache.opponentsHeroes['' + player.hero_id].kills += player.kills;
+                        cache.opponentsHeroes['' + player.hero_id].deaths += player.deaths;
+                        cache.opponentsHeroes['' + player.hero_id].assists += player.assists;
                     }
                 }
             }
@@ -114,7 +150,7 @@
             that.wrapperPopup = options.wrapperPopup;
 
             result.duration_text = that.parsePeriod(currentTime - (result.start_time + result.duration));
-            result.duration = that.parseDuration(result.duration);
+            result.duration_parse = that.parseDuration(result.duration);
             result.mode_text = app.mods.toJSON()[0].mods[result.game_mode].name;
 
             model.set('result', result);

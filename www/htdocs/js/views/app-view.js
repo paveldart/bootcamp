@@ -18,7 +18,8 @@
 
 		events: {
             'click #stats-container': 'visibleStats',
-            'click body': 'visibleStatsBody'
+            'click body': 'visibleStatsBody',
+            'click .wrapper-hero-image': 'showPopup'
 		},
 
 		initialize: function () {
@@ -65,6 +66,10 @@
                 direLoses,
                 ourWinHeroes,
                 opponentsWinHeroes,
+                ourKDARateHeroes,
+                opponentsKDARateHeroes,
+                ourWinRateHeroes,
+                opponentsWinRateHeroes,
                 cache = app.cache,
                 u;
 
@@ -80,8 +85,13 @@
                 direLoses = dire - direWins;
 
                 if (app.matches.length) {
-//                    cache.ourWinRateHeroes = that.winRateSortHeroes(cache.ourHeroes);
-//                    cache.opponentsWinRateHeroes = that.winRateSortHeroes(cache.opponentsHeroes);
+                    ourKDARateHeroes = that.KDASortHeroes(cache.ourHeroes);
+                    opponentsKDARateHeroes = that.KDASortHeroes(cache.opponentsHeroes);
+
+                    ourWinRateHeroes = that.winRateSortHeroes(cache.ourHeroes);
+                    ourWinRateHeroes = that.deleteUnnecessaryWinRateHeroes(ourWinRateHeroes, 'our');
+                    opponentsWinRateHeroes = that.winRateSortHeroes(cache.opponentsHeroes);
+                    opponentsWinRateHeroes = that.deleteUnnecessaryWinRateHeroes(opponentsWinRateHeroes, 'opponents');
 
                     ourWinHeroes = that.sortHeroes(cache.ourWinHeroes);
                     opponentsWinHeroes = that.sortHeroes(cache.opponentsWinHeroes);
@@ -102,7 +112,11 @@
                         direLoses: direLoses,
                         heroes: app.heroes.toJSON()[0],
                         ourWinHeroes: ourWinHeroes,
-                        opponentsWinHeroes: opponentsWinHeroes
+                        opponentsWinHeroes: opponentsWinHeroes,
+                        ourKDARateHeroes: ourKDARateHeroes,
+                        opponentsKDARateHeroes: opponentsKDARateHeroes,
+                        ourWinRateHeroes: ourWinRateHeroes,
+                        opponentsWinRateHeroes: opponentsWinRateHeroes
                     }));
                 } else {
                     that.$main.hide();
@@ -144,16 +158,19 @@
 		},
 
         visibleStats: function (e) {
-            var that = this;
+            var that = this,
+                target = $(e.target)[0];
 
             e.preventDefault();
 
-            if (that.$statsVisible === true) {
-                that.$stats.removeClass('isVisible');
-                that.$statsVisible = false;
-            } else {
-                that.$stats.addClass('isVisible');
-                that.$statsVisible = true;
+            if ($(target).hasClass('win-rate-hero') !== true) {
+                if (that.$statsVisible === true) {
+                    that.$stats.removeClass('isVisible');
+                    that.$statsVisible = false;
+                } else {
+                    that.$stats.addClass('isVisible');
+                    that.$statsVisible = true;
+                }
             }
 		},
 
@@ -167,6 +184,17 @@
                 that.$statsVisible = false;
             }
 		},
+
+        showPopup: function(e){
+            var that = this,
+                id = e.currentTarget.getAttribute('data-id');
+
+            e.preventDefault();
+
+            that.popup = new app.PopupView({ heroID: id, wrapperPopup: that.$popup });
+
+            that.$popup.addClass('isVisible');
+        },
 
         sortHeroes: function(heroes) {
             var sortHeroes = {},
@@ -216,7 +244,31 @@
                     }
                 }
             }
-            return this.deleteUnnecessaryHeroes(sortHeroes, null);
+            return sortHeroes;
+        },
+
+        KDASortHeroes: function(heroes) {
+            var sortHeroes = {},
+                heroID,
+                currentHero,
+                currentKDA;
+
+            for (heroID in heroes) {
+                if ((heroes.hasOwnProperty(heroID)) && (heroID !== 'count')) {
+                    currentHero = heroes[heroID];
+                    if (currentHero.win + currentHero.lose > 1) {
+                        currentKDA = ((((currentHero.kills + currentHero.assists) / currentHero.deaths) * 100) | 0) / 100;
+
+                        if (sortHeroes[currentKDA] === u) {
+                            sortHeroes[currentKDA] = [];
+                            sortHeroes[currentKDA].push(heroID);
+                        } else {
+                            sortHeroes[currentKDA].push(heroID)
+                        }
+                    }
+                }
+            }
+            return this.deleteUnnecessaryKDAHeroes(sortHeroes);
         },
 
         deleteUnnecessaryHeroes: function(heroes, type) {
@@ -264,6 +316,89 @@
                     pushLose(winHeroes[i]);
                 }
             }
+
+            return winHeroes;
+        },
+
+        deleteUnnecessaryKDAHeroes: function(heroes) {
+            var countID,
+                winHeroes = [],
+                currentHeroes,
+                currentHeroesCount,
+                i;
+
+            function sortFunction(a, b){
+                if (a[0] - 0 > b[0] - 0) {
+                    return -1
+                } else if (a[0] - 0 < b[0] - 0) {
+                    return 1;
+                } else {
+                    return 0;
+                }
+            }
+
+            for (countID in heroes) {
+                if ((heroes.hasOwnProperty(countID)) && (countID !== 'count')) {
+                    currentHeroesCount = heroes[countID];
+                    for (i = currentHeroesCount.length; i--;) {
+                        currentHeroes = [];
+                        currentHeroes.push(countID);
+                        currentHeroes.push(currentHeroesCount[i]);
+                        winHeroes.push(currentHeroes);
+                    }
+                }
+            }
+
+            winHeroes = winHeroes.sort(sortFunction);
+            winHeroes.length = 5;
+
+            return winHeroes;
+        },
+
+        deleteUnnecessaryWinRateHeroes: function(heroes, type) {
+            var countID,
+                winHeroes = [],
+                currentHeroes,
+                currentHeroesCount,
+                cache = app.cache.ourHeroes,
+                i;
+
+            if (type === 'opponents') {
+                cache = app.cache.opponentsHeroes;
+            }
+
+            function sortFunction(a, b){
+                if (a[0] - 0 > b[0] - 0) {
+                    return -1
+                } else if (a[0] - 0 < b[0] - 0) {
+                    return 1;
+                } else if (a[0] - 0 === b[0] - 0) {
+                    if (a[2] - 0 > b[2] - 0) {
+                        return -1
+                    } else if (a[2] - 0 < b[2] - 0) {
+                        return 1;
+                    }
+                } else {
+                    return 0;
+                }
+            }
+
+            for (countID in heroes) {
+                if ((heroes.hasOwnProperty(countID)) && (countID !== 'count')) {
+                    currentHeroesCount = heroes[countID];
+                    for (i = currentHeroesCount.length; i--;) {
+                        currentHeroes = [];
+                        currentHeroes.push(countID);
+                        currentHeroes.push(currentHeroesCount[i]);
+                        currentHeroes.push(cache[currentHeroesCount[i]].win);
+                        winHeroes.push(currentHeroes);
+                    }
+                }
+            }
+
+            winHeroes = winHeroes.sort(sortFunction);
+
+            winHeroes.length = 5;
 
             return winHeroes;
         }

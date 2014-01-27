@@ -9,6 +9,8 @@ $(function () {
         },
         ourWinRateHeroes: {
         },
+        ourKDARateHeroes: {
+        },
         ourWinHeroes: {
             count: 0
         },

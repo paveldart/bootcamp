@@ -230,17 +230,19 @@
                     currentWinValue = currentHero.win;
                     currentLoseValue = currentHero.lose;
 
-                    if (currentLoseValue === 0) {
-                        currentValue = '100';
-                    } else {
-                        currentValue = Math.round(100 * currentWinValue / (currentWinValue + currentLoseValue)) + '';
-                    }
+                    if (currentWinValue + currentLoseValue > 1) {
+                        if (currentLoseValue === 0) {
+                            currentValue = '100';
+                        } else {
+                            currentValue = Math.round(100 * currentWinValue / (currentWinValue + currentLoseValue)) + '';
+                        }
 
-                    if (sortHeroes[currentValue] === u) {
-                        sortHeroes[currentValue] = [];
-                        sortHeroes[currentValue].push(heroID);
-                    } else {
-                        sortHeroes[currentValue].push(heroID)
+                        if (sortHeroes[currentValue] === u) {
+                            sortHeroes[currentValue] = [];
+                            sortHeroes[currentValue].push(heroID);
+                        } else {
+                            sortHeroes[currentValue].push(heroID)
+                        }
                     }
                 }
             }
@@ -283,6 +285,24 @@
                 cache = app.cache.opponentsHeroes;
             }
 
+            function sortFunction(a, b){
+                var returnSort;
+                if (a[1] - 0 > b[1] - 0) {
+                    returnSort = -1;
+                } else if (a[1] - 0 < b[1] - 0) {
+                    returnSort = 1;
+                } else if (a[1] - 0 === b[1] - 0) {
+                    if (a[2] - 0 > b[2] - 0) {
+                        returnSort = 1;
+                    } else if (a[2] - 0 < b[2] - 0) {
+                        returnSort = -1;
+                    }
+                } else {
+                    returnSort = 0;
+                }
+                return returnSort;
+            }
+
             for (countID in heroes) {
                 if ((heroes.hasOwnProperty(countID)) && (countID !== 'count')) {
                     currentHeroesCount = heroes[countID];
@@ -303,19 +323,15 @@
                 }
             }
 
-            winHeroes[0] = winHeroes[winHeroes.length - 1];
-            winHeroes[1] = winHeroes[winHeroes.length - 2];
-            winHeroes[2] = winHeroes[winHeroes.length - 3];
-            winHeroes[3] = winHeroes[winHeroes.length - 4];
-            winHeroes[4] = winHeroes[winHeroes.length - 5];
-
-            winHeroes.length = 5;
-
             if (type !== null) {
                 for (i = winHeroes.length; i-- ;) {
                     pushLose(winHeroes[i]);
                 }
             }
+
+            winHeroes = winHeroes.sort(sortFunction);
+
+            winHeroes.length = 5;
 
             return winHeroes;
         },

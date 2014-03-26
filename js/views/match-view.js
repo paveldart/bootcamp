@@ -52,7 +52,7 @@
                 model.set('win', false);
             }
 
-            if ((app.cache.currentTimestamp !== u) && (app.cache.currentTimestamp - result.start_time > 86400)) {
+            if ((app.cache.currentTimestamp !== u) && (app.cache.currentTimestamp - result.start_time > 72000)) {
                 that.$el.addClass('new-day');
             }
 

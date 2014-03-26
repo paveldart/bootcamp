@@ -1,3 +1,0 @@
-Options +ExecCGI +FollowSymLinks -Indexes
-AddHandler cgi-script .cgi
-

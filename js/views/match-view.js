@@ -77,7 +77,8 @@
                             lose: 0,
                             kills: player.kills,
                             deaths: player.deaths,
-                            assists: player.assists
+                            assists: player.assists,
+                            hero_damage: player.hero_damage
                         };
                         cache.ourHeroes.count += 1;
                     } else {
@@ -85,6 +86,7 @@
                         cache.ourHeroes['' + player.hero_id].kills += player.kills;
                         cache.ourHeroes['' + player.hero_id].deaths += player.deaths;
                         cache.ourHeroes['' + player.hero_id].assists += player.assists;
+                        cache.ourHeroes['' + player.hero_id].hero_damage += player.hero_damage;
                     }
                 } else if (((result.radiant_win === false) && (result.radiant_team === true) && (i <= 4)) || ((result.radiant_win === true) && (result.radiant_team === false) && (i > 4))) {
                     if (cache.ourHeroes['' + player.hero_id] === u) {
@@ -93,7 +95,8 @@
                             lose: 1,
                             kills: player.kills,
                             deaths: player.deaths,
-                            assists: player.assists
+                            assists: player.assists,
+                            hero_damage: player.hero_damage
                         };
                         cache.ourHeroes.count += 1;
                     } else {
@@ -101,6 +104,7 @@
                         cache.ourHeroes['' + player.hero_id].kills += player.kills;
                         cache.ourHeroes['' + player.hero_id].deaths += player.deaths;
                         cache.ourHeroes['' + player.hero_id].assists += player.assists;
+                        cache.ourHeroes['' + player.hero_id].hero_damage += player.hero_damage;
                     }
                 }
 
@@ -119,7 +123,8 @@
                             lose: 0,
                             kills: player.kills,
                             deaths: player.deaths,
-                            assists: player.assists
+                            assists: player.assists,
+                            hero_damage: player.hero_damage
                         };
                         cache.opponentsHeroes.count += 1;
                     } else {
@@ -127,6 +132,7 @@
                         cache.opponentsHeroes['' + player.hero_id].kills += player.kills;
                         cache.opponentsHeroes['' + player.hero_id].deaths += player.deaths;
                         cache.opponentsHeroes['' + player.hero_id].assists += player.assists;
+                        cache.opponentsHeroes['' + player.hero_id].hero_damage += player.hero_damage;
                     }
                 } else if (((result.radiant_win === false) && (result.radiant_team === false) && (i <= 4)) || ((result.radiant_win === true) && (result.radiant_team === true) && (i > 4))) {
                     if (cache.opponentsHeroes['' + player.hero_id] === u) {
@@ -135,7 +141,8 @@
                             lose: 1,
                             kills: player.kills,
                             deaths: player.deaths,
-                            assists: player.assists
+                            assists: player.assists,
+                            hero_damage: player.hero_damage
                         };
                         cache.opponentsHeroes.count += 1;
                     } else {
@@ -143,6 +150,7 @@
                         cache.opponentsHeroes['' + player.hero_id].kills += player.kills;
                         cache.opponentsHeroes['' + player.hero_id].deaths += player.deaths;
                         cache.opponentsHeroes['' + player.hero_id].assists += player.assists;
+                        cache.opponentsHeroes['' + player.hero_id].hero_damage += player.hero_damage;
                     }
                 }
             }

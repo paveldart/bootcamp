@@ -70,6 +70,8 @@
                 opponentsKDARateHeroes,
                 ourWinRateHeroes,
                 opponentsWinRateHeroes,
+                ourHeroDamageHeroes,
+                opponentsHeroDamageHeroes,
                 cache = app.cache,
                 u;
 
@@ -98,6 +100,9 @@
                     ourWinHeroes = that.deleteUnnecessaryHeroes(ourWinHeroes, 'our');
                     opponentsWinHeroes = that.deleteUnnecessaryHeroes(opponentsWinHeroes, 'opponents');
 
+                    ourHeroDamageHeroes = that.heroDamageSortHeroes(cache.ourHeroes);
+                    opponentsHeroDamageHeroes = that.heroDamageSortHeroes(cache.opponentsHeroes);
+
                     that.$main.show();
                     that.$stats.show();
 
@@ -116,7 +121,9 @@
                         ourKDARateHeroes: ourKDARateHeroes,
                         opponentsKDARateHeroes: opponentsKDARateHeroes,
                         ourWinRateHeroes: ourWinRateHeroes,
-                        opponentsWinRateHeroes: opponentsWinRateHeroes
+                        opponentsWinRateHeroes: opponentsWinRateHeroes,
+                        ourHeroDamageHeroes: ourHeroDamageHeroes,
+                        opponentsHeroDamageHeroes: opponentsHeroDamageHeroes
                     }));
                 } else {
                     that.$main.hide();
@@ -266,6 +273,30 @@
                             sortHeroes[currentKDA].push(heroID);
                         } else {
                             sortHeroes[currentKDA].push(heroID)
+                        }
+                    }
+                }
+            }
+            return this.deleteUnnecessaryKDAHeroes(sortHeroes);
+        },
+
+        heroDamageSortHeroes: function(heroes) {
+            var sortHeroes = {},
+                heroID,
+                currentHero,
+                currentHeroDamage;
+
+            for (heroID in heroes) {
+                if ((heroes.hasOwnProperty(heroID)) && (heroID !== 'count')) {
+                    currentHero = heroes[heroID];
+                    if (currentHero.win + currentHero.lose > 1) {
+                        currentHeroDamage = (currentHero.hero_damage / (currentHero.win + currentHero.lose)) | 0;
+
+                        if (sortHeroes[currentHeroDamage] === u) {
+                            sortHeroes[currentHeroDamage] = [];
+                            sortHeroes[currentHeroDamage].push(heroID);
+                        } else {
+                            sortHeroes[currentHeroDamage].push(heroID)
                         }
                     }
                 }

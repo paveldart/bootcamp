@@ -151,7 +151,7 @@ h1 {
     }
 
 .match-view.isToggled {
-    height: 255px;
+    height: 300px;
     }
 
 .won {
@@ -284,7 +284,7 @@ h1 {
 #stats-container {
     color: #777;
     position: absolute;
-    top: -590px;
+    top: -660px;
     width: 100%;
     z-index: 200;
     min-width: 1000px;
@@ -299,7 +299,7 @@ h1 {
     }
 
 #stats-container:hover {
-    top: -585px;
+    top: -655px;
     }
 
 #stats-container.isVisible {
@@ -311,7 +311,7 @@ h1 {
     padding: 15px 0 20px;
     width: 1000px;
     margin: 0 auto;
-    height: 565px;
+    height: 635px;
     }
 
 .count {
@@ -449,10 +449,10 @@ h1 {
 
 #popup-wrapper.isVisible #popup {
     background: #FFFBEE;
-    height: 298px;
+    height: 348px;
     left: 50%;
     margin-left: -275px;
-    margin-top: -175px;
+    margin-top: -200px;
     padding: 25px;
     position: absolute;
     text-align: center;

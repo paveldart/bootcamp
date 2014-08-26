@@ -237,7 +237,7 @@
                     currentWinValue = currentHero.win;
                     currentLoseValue = currentHero.lose;
 
-                    if (currentWinValue + currentLoseValue > 1) {
+                    if (currentWinValue + currentLoseValue > 4) {
                         if (currentLoseValue === 0) {
                             currentValue = '100';
                         } else {
@@ -265,7 +265,7 @@
             for (heroID in heroes) {
                 if ((heroes.hasOwnProperty(heroID)) && (heroID !== 'count')) {
                     currentHero = heroes[heroID];
-                    if (currentHero.win + currentHero.lose > 1) {
+                    if (currentHero.win + currentHero.lose > 4) {
                         currentKDA = ((((currentHero.kills + currentHero.assists) / currentHero.deaths) * 100) | 0) / 100;
 
                         if (sortHeroes[currentKDA] === u) {
@@ -289,7 +289,7 @@
             for (heroID in heroes) {
                 if ((heroes.hasOwnProperty(heroID)) && (heroID !== 'count')) {
                     currentHero = heroes[heroID];
-                    if (currentHero.win + currentHero.lose > 1) {
+                    if (currentHero.win + currentHero.lose > 4) {
                         currentHeroDamage = (currentHero.hero_damage / (currentHero.win + currentHero.lose)) | 0;
 
                         if (sortHeroes[currentHeroDamage] === u) {

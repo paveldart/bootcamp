@@ -1,24 +1,37 @@
 (function () {
     var app = window.app || {},
-        MatchRouter;
+        AppRouter;
 
-	// Match Router
+	// Router
 	// ----------
-    MatchRouter = Backbone.Router.extend({
+    AppRouter = Backbone.Router.extend({
 		routes: {
-			'*filter': 'setFilter'
+//			'*filter': 'setFilter',
+            'draft': 'draftPage',
+            '': 'mainPage',
+            '/': 'mainPage'
 		},
 
-		setFilter: function (param) {
-			// Set the current filter to be used
-			app.MatchFilter = param || '';
+        mainPage: function () {
+            new app.PageView();
+        },
 
-			// Trigger a collection filter event, causing hiding/unhiding
-			// of Match view items
-			app.matches.trigger('filter');
-		}
+        draftPage: function () {
+            new app.DraftView();
+        }
+
+//		setFilter: function (param) {
+//			// Set the current filter to be used
+//			app.MatchFilter = param || '';
+//
+//			// Trigger a collection filter event, causing hiding/unhiding
+//			// of Match view items
+//			app.matches.trigger('filter');
+//		},
 	});
 
-	app.MatchRouter = new MatchRouter();
-	Backbone.history.start();
+	app.AppRouter = new AppRouter();
+    app.AppRouter.on('route:defaultRoute', function(actions) {
+        console.log(actions);
+    });
 })();

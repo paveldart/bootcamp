@@ -500,6 +500,12 @@ h1 {
             transform: rotate(-90deg)
     }
 
+#link {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+}
+
 /*
 	Hack to remove background from Mobile Safari.
 	Can't use it globally since it destroys checkboxes in Firefox and Opera

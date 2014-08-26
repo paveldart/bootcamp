@@ -1,7 +1,7 @@
 $(function () {
     var app = window.app || {};
 
-	new app.AppView();
+    Backbone.history.start();
 
     app.cache = {
         ourHeroes: {

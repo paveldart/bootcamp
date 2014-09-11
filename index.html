@@ -34,9 +34,19 @@
             <div class="header">
                 <h1>draft</h1>
                 <div class="draft-wrapper">
-                    <select id="heroes-select"></select>
+                    <select id="heroes-select">
+                        <option disabled selected>select hero</option>
+                    </select>
+                    <div class="pick-title">Pick</div>
+                    <div id="selected-heroes"></div>
+                    <div class="pick-title">Counter-pick</div>
+                    <div id="counter-selected-heroes"></div>
                 </div>
             </div>
+        </script>
+
+        <script type="text/template" id="selected-hero">
+            <div class="select-hero"><img src="images/heroes/<%- hero %>.png" title="<%- heroes[hero].localized_name  %>"></div>
         </script>
 
 		<script type="text/template" id="item-template">

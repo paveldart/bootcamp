@@ -61,6 +61,18 @@ h1 {
     width: 100%;
 }
 
+.pick-title {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 20px;
+    font-weight: normal;
+    line-height: 1.4;
+    margin: 20px 0 0;
+    opacity: 0;
+    text-align: center;
+    text-shadow: -1px -1px rgba(0, 0, 0, 0.5);
+    width: 100%;
+}
+
 .header {
     padding: 15px 0 30px;
 }
@@ -507,13 +519,24 @@ h1 {
 }
 
 .draft-wrapper {
-    width: 1000px;
+    max-width: 1000px;
     margin: 100px auto 0;
     text-align: center;
     opacity: 0;
     -webkit-transition: all 1s linear;
-    -moz-transition: all 1s linear;
-    transition: all 1s linear;
+       -moz-transition: all 1s linear;
+            transition: all 1s linear;
+}
+
+.select-hero {
+    display: inline-block;
+    vertical-align: top;
+    margin: 10px 0 0;
+}
+
+.select-hero img {
+    width: 128px;
+    height: 77px;
 }
 
 /*

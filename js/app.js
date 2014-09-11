@@ -4,6 +4,8 @@ $(function () {
     Backbone.history.start();
 
     app.cache = {
+        pickHeroes: {},
+        pickOpponentsHeroes: {},
         ourHeroes: {
             count: 0
         },

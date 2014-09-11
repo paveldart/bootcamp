@@ -9,6 +9,8 @@
 
 		template: _.template($('#draft-template').html()),
 
+        heroSelectedTemplate: _.template($('#selected-hero').html()),
+
 		initialize: function () {
             var that = this;
 
@@ -32,19 +34,65 @@
                 heroes = app.heroes.toJSON()[0],
                 select,
                 options = '',
-                hero;
+                hero,
+                currentHero;
 
             $(that.el).html(that.template());
 
             setTimeout(function(){
                 select = $('#heroes-select');
                 for (hero in heroes) {
-                    options += '<option value="' + heroes[hero].name +'">' + heroes[hero].localized_name + '</option>';
+                    options += '<option id="select-hero-' + heroes[hero].name + '" value="' + hero +'">' + heroes[hero].localized_name + '</option>';
                 }
 
                 select.append(options);
 
                $(that.el).find('.draft-wrapper').addClass('isVisible');
+
+                select.change(function(){
+                    var self = this,
+                        value = heroes[self.value].name,
+                        tempData = {},
+                        counterPickHeroes = { count: 0 },
+                        newCounterPickHeroes = {};
+                    if (!app.cache.pickHeroes[value]) {
+                        $.get('/data/heroes/' + value +'.json', function(result){
+                            app.cache.pickHeroes[value] = result;
+                            $('#select-hero-' + value)[0].disabled = true;
+
+                            tempData.hero = self.value;
+                            tempData.heroes = heroes;
+                            $(that.el).find('#selected-heroes').append(that.heroSelectedTemplate(tempData));
+                            $(that.el).find('.pick-title').addClass('isVisible');
+
+                            for (hero in app.cache.pickHeroes) {
+                                counterPickHeroes.count += 1;
+                                for (currentHero in app.cache.pickHeroes[hero]) {
+                                    if (!(counterPickHeroes[currentHero])) {
+                                        counterPickHeroes[currentHero] = app.cache.pickHeroes[hero][currentHero];
+                                    } else {
+                                        counterPickHeroes[currentHero] = counterPickHeroes[currentHero] + '|' + app.cache.pickHeroes[hero][currentHero];
+                                    }
+                                }
+                            }
+
+                            for (hero in counterPickHeroes) {
+                                var array,
+                                    sum = 0,
+                                    i;
+                                if (counterPickHeroes[hero].length >= (5 * counterPickHeroes.count)) {
+                                    array = counterPickHeroes[hero].split('|');
+                                    for (i = array.length; i--;) {
+                                        sum += array[i] - 0;
+                                    }
+                                    newCounterPickHeroes[(sum / counterPickHeroes.count) + ''] = hero;
+                                }
+                            }
+
+                            console.log(newCounterPickHeroes);
+                        });
+                    }
+                });
             }, 0);
 		}
     });

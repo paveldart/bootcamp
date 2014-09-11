@@ -2,7 +2,7 @@ html,
 body {
     margin: 0;
     padding: 0;
-    }
+}
 
 button {
     margin: 0;
@@ -17,7 +17,7 @@ button {
     -ms-appearance: none;
     -o-appearance: none;
     appearance: none;
-    }
+}
 
 body {
     font: 14px 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -30,25 +30,25 @@ body {
     -ms-font-smoothing: antialiased;
     -o-font-smoothing: antialiased;
     font-smoothing: antialiased;
-    }
+}
 
 button,
 input[type="checkbox"] {
     outline: none;
-    }
+}
 
 a {
     color: #263d48;
-    }
+}
 
 a:hover {
     text-decoration: none;
-    }
+}
 
 #bootcamp {
     margin: 0 0 40px 0;
     position: relative;
-    }
+}
 
 h1 {
     color: rgba(255, 255, 255, 0.3);
@@ -59,11 +59,11 @@ h1 {
     text-align: center;
     text-shadow: -1px -1px rgba(0, 0, 0, 0.2);
     width: 100%;
-    }
+}
 
-#header {
+.header {
     padding: 15px 0 30px;
-    }
+}
 
 #main-header {
     border-top: 1px dotted #ADADAD;
@@ -72,7 +72,7 @@ h1 {
     font-size: 0;
     width: 1000px;
     margin: 0 auto;
-    }
+}
 
 #main-header .match-item {
     padding-top: 5px;
@@ -81,7 +81,7 @@ h1 {
     font-size: 14px;
     line-height: 1.4;
     white-space: nowrap;
-    }
+}
 
 #main {
     border: 1px solid #ccc;
@@ -94,19 +94,19 @@ h1 {
     z-index: 2;
     margin: 0 auto;
     width: 1000px;
-    }
+}
 
 .isLoading #main {
     background: rgba(255, 255, 255, 0.5);
-    }
+}
 
 .radiant {
     color: #A9CF54;
-    }
+}
 
 .dire {
     color: #C23C2A;
-    }
+}
 
 #toggle-all {
     position: absolute;
@@ -116,24 +116,24 @@ h1 {
     text-align: center;
     /* Mobile Safari */
     border: none;
-    }
+}
 
 #toggle-all:before {
     content: '»';
     font-size: 28px;
     color: #d9d9d9;
     padding: 0 25px 7px;
-    }
+}
 
 #toggle-all:checked:before {
     color: #737373;
-    }
+}
 
 #matches-list {
     margin: 0;
     padding: 0;
     list-style: none;
-    }
+}
 
 .match-view {
     position: relative;
@@ -142,29 +142,29 @@ h1 {
     height: 70px;
     overflow: hidden;
     -webkit-transition: height 0.3s;
-       -moz-transition: height 0.3s;
-            transition: height 0.3s;
-    }
+    -moz-transition: height 0.3s;
+    transition: height 0.3s;
+}
 
 .match-view:first-child {
     border-top: none;
-    }
+}
 
 .match-view.isToggled {
     height: 300px;
-    }
+}
 
 .won {
     background: rgba(0, 255, 18, 0.05);
-    }
+}
 
 .lost {
     background: rgba(255, 0, 19, 0.05);
-    }
+}
 
 .new-day {
     border-top: 3px solid #ccc;
-    }
+}
 
 .match-info {
     color: #6E6E6E;
@@ -173,19 +173,18 @@ h1 {
     height: 100%;
     border-top: 1px dotted transparent;
     -webkit-transition: opacity 0.8s;
-       -moz-transition: opacity 0.8s;
-            transition: opacity 0.8s;
-    }
+    -moz-transition: opacity 0.8s;
+    transition: opacity 0.8s;
+}
 
 .isToggled .match-info {
     opacity: 1;
     border-top: 1px dotted #ddd;
-    }
+}
 
 .match-info-line {
     width: 100%;
-    }
-
+}
 
 .match-item {
     display: inline-block;
@@ -194,38 +193,38 @@ h1 {
     vertical-align: middle;
     text-align: center;
     padding: 15px 8px 15px;
-    }
+}
 
 .match-id {
     width: 80px;
-    }
+}
 
 .match-team {
     width: 55px;
-    }
+}
 
 .match-result {
     width: 90px;
-    }
+}
 
 .match-heroes,
 .match-opponents-heroes {
     padding: 15px 0;
     width: 330px;
-    }
+}
 
 .match-info-name {
     font-size: 12px;
     padding: 10px 25px;
     text-align: right;
     width: 178px;
-    }
+}
 
 .wrapper-hero-image {
     display: inline-block;
     position: relative;
     cursor: pointer;
-    }
+}
 
 .win-rate-hero {
     background: none repeat scroll 0 0 rgba(255, 255, 255, 0.3);
@@ -237,19 +236,19 @@ h1 {
     position: absolute;
     text-align: center;
     width: 100%;
-    }
+}
 
 .hero-image {
     width: 64px;
     height: 36px;
     display: inline-block;
     font-size: 12px;
-    }
+}
 
 .hero-stats .hero-image {
     width: 80px;
     height: 45px;
-    }
+}
 
 .match-hero-stats {
     display: inline-block;
@@ -257,29 +256,30 @@ h1 {
     height: 16px;
     padding: 10px 0;
     width: 64px;
-    }
+}
+
 .match-info-line .match-heroes,
 .match-info-line .match-opponents-heroes {
     padding: 0;
-    }
+}
 
 .match-info-line .match-result {
     font-size: 12px;
     padding-top: 10px;
     padding-bottom: 10px;
-    }
+}
 
 .match-mode {
     width: 45px;
     font-size: 10px;
-    }
+}
 
 .match-time,
 .match-duration {
     font-size: 10px;
     color: #555;
     display: block;
-    }
+}
 
 #stats-container {
     color: #777;
@@ -294,17 +294,17 @@ h1 {
     box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2);
     border-bottom: 1px solid #ccc;
     -webkit-transition: top 0.3s;
-       -moz-transition: top 0.3s;
-            transition: top 0.3s;
-    }
+    -moz-transition: top 0.3s;
+    transition: top 0.3s;
+}
 
 #stats-container:hover {
     top: -655px;
-    }
+}
 
 #stats-container.isVisible {
     top: 0;
-    }
+}
 
 #stats {
     font-size: 0;
@@ -312,21 +312,21 @@ h1 {
     width: 1000px;
     margin: 0 auto;
     height: 635px;
-    }
+}
 
 .count {
     font-size: 14px;
     margin: 15px 0 0;
     width: 100%;
-    }
+}
 
 .count.count-last {
     margin: 15px 0;
-    }
+}
 
 .count.count-first {
     margin: 0;
-    }
+}
 
 .meter {
     background: rgba(0, 0, 0, 0);
@@ -337,7 +337,7 @@ h1 {
     -moz-border-radius: 15px;
     border-radius: 15px;
     overflow: hidden;
-    }
+}
 
 .meter .box {
     opacity: 0.6;
@@ -367,7 +367,7 @@ h1 {
     -moz-box-shadow: inset 0 2px 9px rgba(255, 255, 255, 0.3), inset 0 -2px 6px rgba(0, 0, 0, 0.4);
     position: absolute;
     overflow: hidden;
-    }
+}
 
 .meter .box-two {
     background-color: #FF5454;
@@ -390,21 +390,21 @@ h1 {
     border-bottom-left-radius: 0;
     right: 0;
     text-align: right;
-    }
+}
 
 .box-value {
     font-weight: bold;
     padding: 0 20px;
     color: #000;
-    }
+}
 
 .count-label {
     padding: 0 20px;
-    }
+}
 
 .count-label-right {
     float: right;
-    }
+}
 
 .hero-stats-line {
     clear: both;
@@ -416,25 +416,25 @@ h1 {
     margin: 0;
     font-size: 14px;
     padding: 0 0 0 20px;
-    }
+}
 
 .hero-opponents-stats {
     float: right;
     text-align: right;
     padding: 0 20px 0 0;
-    }
+}
 
 .hero-stats-label {
     padding-bottom: 5px;
-    }
+}
 
 #popup-wrapper {
     display: none;
-    }
+}
 
 #popup-wrapper.isVisible {
     display: block;
-    }
+}
 
 #popup-wrapper.isVisible .popup-content {
     background: none repeat scroll 0 0 rgba(255, 255, 255, 0.5);
@@ -445,7 +445,7 @@ h1 {
     top: 0;
     width: 100%;
     z-index: 2000;
-    }
+}
 
 #popup-wrapper.isVisible #popup {
     background: #FFFBEE;
@@ -459,27 +459,27 @@ h1 {
     top: 50%;
     width: 498px;
     border: 1px solid #CCC;
-    }
+}
 
 .popup-hero-title {
     font-size: 20px;
     line-height: 40px;
-    }
+}
 
 .popup-opponents-heroes,
 .popup-our-heroes {
     padding-top: 20px;
     width: 50%;
     font-size: 16px;
-    }
+}
 
 .popup-hero-stats {
     margin-bottom: 10px;
-    }
+}
 
 .popup-opponents-heroes {
     float: right;
-    }
+}
 
 .icon-close {
     background: url('../images/icon-close.png') 0 0 no-repeat;
@@ -490,15 +490,15 @@ h1 {
     top: 0;
     opacity: 0.5;
     -webkit-transition: transform 0.3s;
-       -moz-transition: transform 0.3s;
-            transition: transform 0.3s;
-    }
+    -moz-transition: transform 0.3s;
+    transition: transform 0.3s;
+}
 
 .icon-close:hover {
     -webkit-transform: rotate(-90deg);
-       -moz-transform: rotate(-90deg);
-            transform: rotate(-90deg)
-    }
+    -moz-transform: rotate(-90deg);
+    transform: rotate(-90deg)
+}
 
 #link {
     position: absolute;
@@ -506,12 +506,22 @@ h1 {
     top: 20px;
 }
 
+.draft-wrapper {
+    width: 1000px;
+    margin: 100px auto 0;
+    text-align: center;
+    opacity: 0;
+    -webkit-transition: all 1s linear;
+    -moz-transition: all 1s linear;
+    transition: all 1s linear;
+}
+
 /*
 	Hack to remove background from Mobile Safari.
 	Can't use it globally since it destroys checkboxes in Firefox and Opera
 */
 
-@media screen and (-webkit-min-device-pixel-ratio:0) {
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
     #toggle-all {
         top: -56px;
         left: -15px;
@@ -522,9 +532,13 @@ h1 {
         transform: rotate(90deg);
         -webkit-appearance: none;
         appearance: none;
-        }
     }
+}
 
 .isHidden {
     display: none;
-    }
+}
+
+.isVisible {
+    opacity: 1;
+}

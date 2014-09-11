@@ -7,18 +7,15 @@ $(function () {
         ourHeroes: {
             count: 0
         },
-        ourWinRateHeroes: {
-        },
-        ourKDARateHeroes: {
-        },
+        ourWinRateHeroes: {},
+        ourKDARateHeroes: {},
         ourWinHeroes: {
             count: 0
         },
         opponentsHeroes: {
             count: 0
         },
-        opponentsWinRateHeroes: {
-        },
+        opponentsWinRateHeroes: {},
         opponentsWinHeroes: {
             count: 0
         },

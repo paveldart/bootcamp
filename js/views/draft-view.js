@@ -93,7 +93,7 @@
                                         sum += array[i] - 0;
                                     }
                                     if (newCounterPickHeroes[sum]) {
-                                        tempArray = [newCounterPickHeroes[(sum / counterPickHeroes.count) + '']];
+                                        tempArray = [newCounterPickHeroes[sum]];
                                         tempArray.push(hero);
                                         newCounterPickHeroes[sum] = tempArray;
                                     } else {
@@ -134,7 +134,8 @@
 
                             $(that.el).find('#counter-selected-heroes').empty();
 
-                            for (i = 0; i < 6; i+=1) {
+                            console.log(newCounterPickHeroes);
+                            for (i = 0; i < 5; i+=1) {
                                 for (hero in heroes) {
                                     if (newCounterPickHeroesArray[i][1] === heroes[hero].localized_name) {
                                         tempData.hero = hero;
